@@ -1,3 +1,10 @@
 *.json
 run_*.log
 __pycache__
+# Files
+*~
+.env
+
+# Directories
+node_modules
+venv/
