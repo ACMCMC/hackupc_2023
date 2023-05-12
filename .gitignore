@@ -1,0 +1,3 @@
+*.json
+run_*.log
+__pycache__
