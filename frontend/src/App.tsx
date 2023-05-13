@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Auth0Provider } from '@auth0/auth0-react';
+// import 'bootstrap/dist/css/bootstrap.css';
+// import { Auth0Provider } from '@auth0/auth0-react';
 
 function App() {
   return (
@@ -28,7 +27,7 @@ function App() {
 }
 
 /*
-ReactDOM.render(
+
   <Auth0Provider
     domain="{process.env.REACT_APP_AUTH0_DOMAIN}"
     clientId="{process.env.REACT_APP_AUTH0_CLIENT_ID}"
@@ -36,10 +35,5 @@ ReactDOM.render(
 	redirect_uri: window.location.origin
     }}
   >
-
-  <App />
-
-  </Auth0Provider>, document.getElementById("root")
-);
 */
 export default App;

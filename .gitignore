@@ -4,6 +4,7 @@ __pycache__
 # Files
 *~
 .env
+main.o
 
 # Directories
 node_modules
