@@ -1,6 +1,4 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import React from "react";
-import { Menu as MenuIcon } from "@mui/icons-material"
+import * as React from 'react';
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -9,9 +7,11 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import { Menu as MenuIcon } from "@mui/icons-material"
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 
-export const NavbarComponent = () => {
-    const [open, setOpen] = React.useState(false);
+export default function MenuListComposition() {
+  const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const handleToggle = () => {
@@ -47,11 +47,10 @@ export const NavbarComponent = () => {
 
     prevOpen.current = open;
   }, [open]);
-    return (
-        <AppBar position="static">
-            <Toolbar>
-            <Stack direction="row" spacing={2}>
-      <div>
+
+  return (
+    <Stack direction="row" spacing={2}>
+      <div color='white'>
         <Button
           ref={anchorRef}
           id="composition-button"
@@ -101,9 +100,6 @@ export const NavbarComponent = () => {
                     MiKasa
         </Typography>
     </Stack>
-            </Toolbar>
-        </AppBar>
-    );
+    
+  );
 }
-
-export default NavbarComponent;
