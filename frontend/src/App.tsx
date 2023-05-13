@@ -27,7 +27,7 @@ function App() {
   );
 }
 
-/*
+
 ReactDOM.render(
   <Auth0Provider
     #domain="{process.env.REACT_APP_AUTH0_DOMAIN}"
@@ -43,5 +43,5 @@ ReactDOM.render(
 
   </Auth0Provider>, document.getElementById("root")
 );
-*/
+
 export default App;
