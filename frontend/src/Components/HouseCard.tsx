@@ -20,6 +20,8 @@ interface Props {
 export const HouseCard: React.FC<Props> = ({ house }) => {
     const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
 
+    console.log(elevation);
+
     return (
         <Card
             sx={{
@@ -35,6 +37,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
             onMouseEnter={() => set({ elevation: 1 })}
             onMouseLeave={() => set({ elevation: 0 })}
         >
+        
             <Box
                 component="img"
                 sx={{

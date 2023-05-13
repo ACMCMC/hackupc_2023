@@ -65,18 +65,18 @@ export const SearchPage = () => {
 
   return (
     <Box
-      margin={{ sm: 4, md: 8 }}
+      margin={{ xs: 4, md: 8 }}
     >
-      <Box
+      {/*<Box
         marginBottom={4}
       >
         <Typography typography={'h3'}>Search Page</Typography>
-      </Box>
+      </Box>*/}
       <TextField
         fullWidth
         variant="outlined"
         type="text"
-        placeholder="Search..."
+        placeholder="Netflix, pizza, books..."
         value={searchTerm}
         onChange={handleTextFieldChange}
         onKeyDown={handleKeyDown}
