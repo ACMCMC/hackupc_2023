@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
+import { Container, Box } from "@mui/material";
 
 export const SearchPage = () => {
   const [houses, setHouses] = useState<House[]>([]);
@@ -21,6 +22,24 @@ export const SearchPage = () => {
         image:
           "https://images.unsplash.com/photo-1584395630824-9d9d0d6b9b5c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
         id: 1,
+      },
+      {
+        address: "123 Main St",
+        name: "House 1",
+        price: 999,
+        description: "This is a house",
+        image:
+          "https://images.unsplash.com/photo-1584395630824-9d9d0d6b9b5c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
+        id: 2,
+      },
+      {
+        address: "123 Main St",
+        name: "House 1",
+        price: 500,
+        description: "This is a house",
+        image:
+          "https://images.unsplash.com/photo-1584395630824-9d9d0d6b9b5c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
+        id: 3,
       },
     ];
     setHouses(data);
@@ -48,9 +67,11 @@ export const SearchPage = () => {
       <div className="row">
         {filteredHouses.map((house) => {
           return (
-            <div className="col-md-4" key={house.name}>
+            <Box
+              margin={2}
+            >
               <HouseCard house={house} />
-            </div>
+            </Box>
           );
         })}
       </div>
