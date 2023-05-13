@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginButton from './LoginButton';
+import User from './User';
 import LogOut from './LogOut';
 import logo from './logo.svg';
 import './App.css';
@@ -30,6 +31,7 @@ function App() {
         </a>
         <LoginButton />
         <LogOut />
+        <User />
       </header>
     </div>
   );
