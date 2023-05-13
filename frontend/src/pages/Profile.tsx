@@ -7,7 +7,21 @@ const Profile = () => {
   var { user, isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '80vh'
+      }}
+    >
+      <Typography variant="h4" component="h4" gutterBottom>
+        Loading...
+      </Typography>
+    </Box>
+    );
   }
   /*
     isAuthenticated = true;
@@ -24,7 +38,7 @@ const Profile = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh'
+        height: '80vh'
       }}
     >
       {isAuthenticated ? (

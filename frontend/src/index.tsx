@@ -11,7 +11,6 @@ import Login from './pages/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
-import ChipArray from './Components/ChipArray';
 
 import { ThemeProvider } from '@emotion/react';
 import { orange, green, indigo } from '@mui/material/colors';
@@ -46,10 +45,12 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: indigo[500],
+      main: '#F3D8C7',
+      light: '#FBF3EE',
+      dark: '#ECC5AC',
     },
     secondary: {
-      main: orange[500],
+      main: '#E55934',
     },
   },
 });
