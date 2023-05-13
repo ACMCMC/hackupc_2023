@@ -11,7 +11,6 @@ import Login from './pages/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
-import ChipArray from './Components/ChipArray';
 
 import { ThemeProvider } from '@emotion/react';
 import { orange, green, indigo } from '@mui/material/colors';
