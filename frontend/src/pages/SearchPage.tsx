@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Container, Box } from "@mui/material";
+import { Container, Box, TextField, Typography } from "@mui/material";
 
 export const SearchPage = () => {
   const [houses, setHouses] = useState<House[]>([]);
@@ -56,9 +56,17 @@ export const SearchPage = () => {
   });
 
   return (
-    <div>
-      <h1>Search Page</h1>
-      <input
+    <Box
+      margin={{ sm: 4, md: 8 }}
+    >
+      <Box
+        marginBottom={4}
+      >
+        <Typography typography={'h3'}>Search Page</Typography>
+      </Box>
+      <TextField
+        fullWidth
+        variant="outlined"
         type="text"
         placeholder="Search..."
         value={searchTerm}
@@ -68,14 +76,14 @@ export const SearchPage = () => {
         {filteredHouses.map((house) => {
           return (
             <Box
-              margin={2}
+              marginY={{ xs: 4, md: 8 }}
             >
               <HouseCard house={house} />
             </Box>
           );
         })}
       </div>
-    </div>
+    </Box>
   );
 };
 

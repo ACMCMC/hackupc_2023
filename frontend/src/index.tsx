@@ -11,7 +11,7 @@ import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
 import { ThemeProvider } from '@emotion/react';
-import { orange, green } from '@mui/material/colors';
+import { orange, green, indigo } from '@mui/material/colors';
 import { ThemeOptions } from '@mui/material/styles';
 import NavbarComponent from './Components/NavbarComponent';
 import FooterComponent from './Components/FooterComponent';
@@ -35,10 +35,10 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: orange[500],
+      main: indigo[500],
     },
     secondary: {
-      main: green[500],
+      main: orange[500],
     },
   },
 });
@@ -70,9 +70,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      {router.state.location.pathname !== '/login' ? <NavbarComponent/> : <></>}
+      {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
       <RouterProvider router={router} />
-      <FooterComponent/>
+      <FooterComponent />
     </ThemeProvider>
   </React.StrictMode>
 );

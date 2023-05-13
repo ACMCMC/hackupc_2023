@@ -53,16 +53,16 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
                     {house.address}
                 </Box>
-                <Box component="span" sx={{ color: 'primary.main', fontSize: 22 }}>
+                <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
                     € {house.price}
                 </Box>
                 <Box
                     sx={{
                         mt: 1.5,
                         p: 0.5,
-                        backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.1),
+                        backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.1),
                         borderRadius: '5px',
-                        color: (theme) => alpha(theme.palette.secondary.main, 1),
+                        color: (theme) => alpha(theme.palette.primary.main, 1),
                         fontWeight: 'medium',
                         display: 'flex',
                         fontSize: 12,
