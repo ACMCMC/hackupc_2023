@@ -10,6 +10,8 @@ import Login from './Components/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
+import ChipArray from './Components/ChipArray';
+
 import { ThemeProvider } from '@emotion/react';
 import { orange, green, indigo } from '@mui/material/colors';
 import { ThemeOptions } from '@mui/material/styles';
@@ -61,7 +63,7 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <SearchPage></SearchPage>,
-  },
+  }
 ]);
 
 
