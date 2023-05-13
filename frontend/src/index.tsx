@@ -1,25 +1,85 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Auth0Provider } from '@auth0/auth0-react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Login from './Components/LandingPage';
+import AuthenticateUser from './Components/AuthenticateUser';
+import UserFind from './Components/InputWrapper';
+import SearchPage from './pages/SearchPage';
+import { ThemeProvider } from '@emotion/react';
+import { orange, green, indigo } from '@mui/material/colors';
+import { ThemeOptions } from '@mui/material/styles';
+import NavbarComponent from './Components/NavbarComponent';
+import FooterComponent from './Components/FooterComponent';
+import { createTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: indigo[500],
+    },
+    secondary: {
+      main: orange[500],
+    },
+  },
+});
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login></Login>
+  },
+  {
+    path: "/login",
+    element: <AuthenticateUser></AuthenticateUser>
+  },
+  {
+    path: "/home",
+    element: <UserFind></UserFind>,
+  },
+  {
+    path: "/search",
+    element: <SearchPage></SearchPage>,
+  },
+]);
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <Auth0Provider
-    domain="dev-nblj3d35g16682v5.us.auth0.com"
-    clientId="mZ2bRVklXaYCIylvEtQQ4pHPTyXAQQez"
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
-  >
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <Box minHeight={'100vh'}>
+        {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
+        <RouterProvider router={router} />
+        <Box>
+          <FooterComponent />
+        </Box>
+      </Box>
+    </ThemeProvider>
   </React.StrictMode>
-  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
