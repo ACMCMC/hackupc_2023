@@ -33,5 +33,5 @@ jobs:
       working-directory: ./frontend
       env:
         CI: false
-    - run: npm test --passWithNoTests
+    - run: npm test
       working-directory: ./frontend
