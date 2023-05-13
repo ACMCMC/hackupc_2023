@@ -45,10 +45,12 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: indigo[500],
+      main: '#F3D8C7',
+      light: '#FBF3EE',
+      dark: '#ECC5AC',
     },
     secondary: {
-      main: orange[500],
+      main: '#E55934',
     },
   },
 });

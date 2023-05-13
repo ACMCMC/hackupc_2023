@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import { Box } from '@mui/system';
+import { useSpring, animated } from "react-spring";
 
 export interface ChipData {
   key: number;
@@ -25,11 +26,12 @@ export default function ChipArray(props: ChipArrayProps) {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'start',
           flexWrap: 'wrap',
           listStyle: 'none',
           p: 0.5,
           m: 0,
+          minHeight: '8vh'
         }}
         component="ul"
       >

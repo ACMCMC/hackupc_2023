@@ -3,20 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Box, List, Stack, TextField, Typography, easing } from "@mui/material";
+import { Box, Collapse, List, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
-
-interface RenderItemOptions {
-  item: House;
-  handleDeleteHouse: (item: House) => void;
-}
-
-function renderItem({ item, handleDeleteHouse }: RenderItemOptions) {
-  return (
-    <HouseCard house={item} />
-  );
-}
 
 export const SearchPage = () => {
   const [houses, setHouses] = useState<House[]>([]);
@@ -63,17 +52,16 @@ export const SearchPage = () => {
     }
     // Data is a list of num_examples examples
     const num_examples = chipData.length + 1;
-    const data: House[] = [];
+    var data: House[] = [];
     for (let i = 0; i < num_examples; i++) {
-      data.push(example);
+      // copy the example into a new object and then change the id
+      var exampleAdapted = JSON.parse(JSON.stringify(example));
+      exampleAdapted.id = i;
+      data.push(exampleAdapted);
     }
 
     setHouses(data);
   }, [chipData]);
-
-  const filteredHouses = houses.filter((house) => {
-    return house.name.toLowerCase().includes(searchTerm.toLowerCase());
-  });
 
   return (
     <Box
@@ -94,10 +82,18 @@ export const SearchPage = () => {
         onKeyDown={handleKeyDown}
       />
       <ChipArray chips={chipData} handleDelete={handleDelete}></ChipArray>
-      <Stack direction="column" spacing={4} divider>
+      <Stack direction="column" spacing={4}>
         <TransitionGroup>
-          {filteredHouses.map((house) =>
-            renderItem({ item: house, handleDeleteHouse: () => { } })
+          {houses.map((house) =>
+            <Collapse key={house.id}>
+              <Box
+                sx={{
+                  marginBottom: 4,
+                }}
+              >
+                <HouseCard house={house} />
+              </Box>
+            </Collapse>
           )}
         </TransitionGroup>
       </Stack>
