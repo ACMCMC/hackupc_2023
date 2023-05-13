@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import LoginButton from './LoginButton';
 import logo from './logo.svg';
 import './App.css';
 //import 'bootstrap/dist/css/bootstrap.css';
 import { Auth0Provider } from '@auth0/auth0-react';
+
+
+
+
 
 function App() {
   return (
@@ -22,6 +27,7 @@ function App() {
         >
           Learn React
         </a>
+        <LoginButton />
       </header>
     </div>
   );
