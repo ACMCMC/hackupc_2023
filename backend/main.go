@@ -33,13 +33,24 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Fprintf(w,"Hello World on /pushML")
 	case "POST":
-		/*
+		
 		r.ParseForm()
 
+		query := r.FormValue("us")
+
+		/*
 		for k, v := range r.Form {
 
 		}
 		*/
+
+		prompts := []str{"Which of the following appliances are used to ",
+			"In which of the following rooms can be used to ",
+			"What should do when ",
+		}
+
+		
+		
 		query := `In which of the following rooms can I bake a cake?
 - balcony
 - bathroom
@@ -95,7 +106,7 @@ func main() {
 	// fs := http.File
 
 	http.HandleFunc("/",root)
-	//	http.HandleFunc("/authorize",authorize)
+	// http.HandleFunc("/authorize",authorize)
 	http.HandleFunc("/getHouses", getHouses)
 	
 	fmt.Printf("Server running on http://localhost:%s\n", port)
