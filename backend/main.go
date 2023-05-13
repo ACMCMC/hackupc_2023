@@ -12,15 +12,38 @@ const (
 )
 
 func root(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "yo root ")
+	switch r.Method {
+	case "GET":
+		fmt.Fprintf(w,"Hello World on /")
+	case "POST":
+		fmt.Fprintf(w, "POST ON /")
+	default:
+		fmt.Fprintf(w, "NOT AVAILABLE")
+	}
+
+	fmt.Fprintf(w, "Hello World on /")
 }
 
 func authorize(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
+	case "GET":
+		fmt.Fprintf(w,"Hello World on /authorize")
 	case "POST":
-		fmt.Fprintf(w, "yo yo yo")
+		fmt.Fprintf(w, "POST ON /authorize")
 	default:
-		fmt.Fprintf(w,"Hello")
+		fmt.Fprintf(w, "NOT AVAILABLE")
+
+	}
+}
+
+func pushML(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		fmt.Fprintf(w,"Hello World on /pushML")
+	case "POST":
+		fmt.Fprintf(w, "POST ON /pushML")
+	default:
+		fmt.Fprintf(w, "NOT AVAILABLE")
 	}
 }
 
@@ -30,7 +53,8 @@ func main() {
 	// fs := http.File
 
 	http.HandleFunc("/",root)
-	http.HandleFunc("/authorize",authorize)	
+	http.HandleFunc("/authorize",authorize)
+	http.HandleFunc("/pushML", pushML)
 	
 	fmt.Printf("Server running on http://localhost:%s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port,nil))
