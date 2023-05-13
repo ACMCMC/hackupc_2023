@@ -2,7 +2,4 @@ module github.com/AOrps/hackupc_2023/backend
 
 go 1.20
 
-require (
-	github.com/elastic/go-elasticsearch v0.0.0 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
-)
+require github.com/joho/godotenv v1.5.1
