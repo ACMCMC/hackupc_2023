@@ -29,6 +29,7 @@ function App() {
           Learn React
         </a>
         <LoginButton />
+        <LogOut />
       </header>
     </div>
   );
