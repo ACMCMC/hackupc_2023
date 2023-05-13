@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Grid, TextField} from '@mui/material';
 import { Button } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import LandingPhoto from '../static/images/LandingPage.jpg';
 
 function Login() {
