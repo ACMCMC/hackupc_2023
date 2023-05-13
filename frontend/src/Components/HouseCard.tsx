@@ -11,12 +11,17 @@ import { House } from "../models/House";
 import { Box, Card } from '@mui/material';
 import ScoreIcon from '@mui/icons-material/Speed';
 import { alpha } from '@mui/material/styles';
+import { useSpring, animated } from "react-spring";
 
 interface Props {
     house: House;
 }
 
 export const HouseCard: React.FC<Props> = ({ house }) => {
+    const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
+
+    console.log(elevation);
+
     return (
         <Card
             sx={{
@@ -29,7 +34,10 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 fontWeight: 'bold',
             }}
             variant="outlined"
+            onMouseEnter={() => set({ elevation: 1 })}
+            onMouseLeave={() => set({ elevation: 0 })}
         >
+        
             <Box
                 component="img"
                 sx={{
@@ -51,7 +59,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 }}
             >
                 <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                    {house.address}
+                    {house.id} | {house.address}
                 </Box>
                 <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
                     € {house.price}

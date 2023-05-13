@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Grid, TextField} from '@mui/material';
 import { Button } from '@mui/material';
-import LandingPhoto from '../static/images/LandingPage.jpg';
+import LandingPhoto from '../static/images/LandingPage2.jpg';
 import { Container } from "@mui/system";
 import { useAuth0 } from "@auth0/auth0-react";
 
