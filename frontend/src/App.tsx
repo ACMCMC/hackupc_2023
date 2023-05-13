@@ -30,7 +30,7 @@ function App() {
 
 ReactDOM.render(
   <Auth0Provider
-    domain="https://mikasa.tech/"
+    domain="dev-nblj3d35g16682v5.us.auth0.com"
     clientId="mZ2bRVklXaYCIylvEtQQ4pHPTyXAQQez"
     authorizationParams={{
 	redirect_uri: window.location.origin
