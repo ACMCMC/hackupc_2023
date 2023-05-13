@@ -19,6 +19,13 @@ import NavbarComponent from './Components/NavbarComponent';
 import FooterComponent from './Components/FooterComponent';
 import { createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { Auth0Provider } from '@auth0/auth0-react';
+import Profile from './pages/Profile';
+import LoginButton from './LoginButton';
+//load from .env file, use env variables
+const REACT_APP_AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN as string;
+const REACT_APP_AUTH0_CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENT_ID as string;
+
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -63,15 +70,29 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <SearchPage></SearchPage>,
-  }
+  },
+  {
+    path: "/profile",
+    element: <Profile></Profile>,
+  },
 ]);
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+// load the domain and client id from the .env file
 root.render(
-  <React.StrictMode>
+  
+    <Auth0Provider
+    domain={REACT_APP_AUTH0_DOMAIN}
+    clientId={REACT_APP_AUTH0_CLIENT_ID}
+
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
+    <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Box minHeight={'100vh'}>
         {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
@@ -81,7 +102,9 @@ root.render(
         </Box>
       </Box>
     </ThemeProvider>
+    
   </React.StrictMode>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
