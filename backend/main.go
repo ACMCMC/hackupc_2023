@@ -36,7 +36,7 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 		
 		r.ParseForm()
 
-		query := r.FormValue("us")
+		_ = r.FormValue("params")
 
 		/*
 		for k, v := range r.Form {
@@ -44,11 +44,16 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 		}
 		*/
 
-		prompts := []str{"Which of the following appliances are used to ",
+		prompts := []string{"Which of the following appliances are used to ",
 			"In which of the following rooms can be used to ",
 			"What should do when ",
 		}
 
+		
+
+		for i := range prompts {
+			fmt.Println(prompts[i])
+		}
 		
 		
 		query := `In which of the following rooms can I bake a cake?
