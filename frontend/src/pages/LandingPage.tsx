@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, ButtonGroup, Grid, TextField } from '@mui/material';
+import { Box, ButtonGroup, Grid, Stack, TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import LandingPhoto from '../static/images/LandingPage2.jpg';
 import { Container } from "@mui/system";
@@ -26,14 +26,13 @@ function Login() {
         }}
         height={{ xs: '35vh', md: '25vh' }}
       ></Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        marginY={8}
-      >
+        <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" marginY={{xs: 4, md: 8}}>
+        <Typography variant="h4" component="h4" marginBottom={4}>
+          Welcome to MiKasa!
+        </Typography>
+        <Typography variant="h6" component="h6" marginBottom={8}>
+          The best way to find your next home.
+        </Typography>
         {isAuthenticated ? (
           <Button variant="contained" disableElevation onClick={() => navigate('search')}>Start searching</Button>
         ) : (
@@ -43,7 +42,7 @@ function Login() {
           <LoginButton></LoginButton>
           <LogoutButton></LogoutButton>
       </ButtonGroup>*/}
-      </Box>
+        </Stack>
     </Box>
   );
 }

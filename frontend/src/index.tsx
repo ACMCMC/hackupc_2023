@@ -60,21 +60,13 @@ const router = createBrowserRouter([{
     <Box minHeight={'100vh'}>
       <NavbarComponent />
       <Outlet />
-      <FooterComponent />
+      {/*<FooterComponent />*/}
     </Box>
   ),
   children: [
     {
       path: "/",
       element: <Login></Login>
-    },
-    {
-      path: "/login",
-      element: <AuthenticateUser></AuthenticateUser>
-    },
-    {
-      path: "/home",
-      element: <UserFind></UserFind>,
     },
     {
       path: "/search",
