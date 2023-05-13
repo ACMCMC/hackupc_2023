@@ -4,7 +4,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
-  RouterProvider,
+  Outlet,
+  RouterProvider
 } from "react-router-dom";
 import Login from './pages/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
@@ -22,6 +23,7 @@ import { Box } from '@mui/material';
 import { Auth0Provider } from '@auth0/auth0-react';
 import Profile from './pages/Profile';
 //load from .env file, use env variables
+// load the variables from the .env file
 const REACT_APP_AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN as string;
 const REACT_APP_AUTH0_CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENT_ID as string;
 
@@ -53,28 +55,37 @@ const theme = createTheme({
 });
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login></Login>
-  },
-  {
-    path: "/login",
-    element: <AuthenticateUser></AuthenticateUser>
-  },
-  {
-    path: "/home",
-    element: <UserFind></UserFind>,
-  },
-  {
-    path: "/search",
-    element: <SearchPage></SearchPage>,
-  },
-  {
-    path: "/profile",
-    element: <Profile></Profile>,
-  },
-]);
+const router = createBrowserRouter([{
+  element: (
+    <Box minHeight={'100vh'}>
+      <NavbarComponent />
+      <Outlet />
+      <FooterComponent />
+    </Box>
+  ),
+  children: [
+    {
+      path: "/",
+      element: <Login></Login>
+    },
+    {
+      path: "/login",
+      element: <AuthenticateUser></AuthenticateUser>
+    },
+    {
+      path: "/home",
+      element: <UserFind></UserFind>,
+    },
+    {
+      path: "/search",
+      element: <SearchPage></SearchPage>,
+    },
+    {
+      path: "/profile",
+      element: <Profile></Profile>,
+    },
+  ]
+}]);
 
 
 const root = ReactDOM.createRoot(
@@ -82,27 +93,19 @@ const root = ReactDOM.createRoot(
 );
 // load the domain and client id from the .env file
 root.render(
-  
-    <Auth0Provider
+
+  <Auth0Provider
     domain={REACT_APP_AUTH0_DOMAIN}
     clientId={REACT_APP_AUTH0_CLIENT_ID}
-
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
   >
     <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Box minHeight={'100vh'}>
-        {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
+      <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
-        <Box>
-          <FooterComponent />
-        </Box>
-      </Box>
-    </ThemeProvider>
-    
-  </React.StrictMode>
+      </ThemeProvider>
+    </React.StrictMode>
   </Auth0Provider>
 );
 
