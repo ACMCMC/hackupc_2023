@@ -1,0 +1,11 @@
+[Unit]
+Description=goweb
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=<DIR>/<BIN>
+
+[Install]
+WantedBy=multi-user.target
