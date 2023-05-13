@@ -12,15 +12,16 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import HomeIcon from '@mui/icons-material/HouseOutlined';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MikasaLogo from '../static/images/MikasaLogo.png';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InfoIcon from '@mui/icons-material/Info';
-import { Link } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/SearchOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircleOutlined';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
+import { Link, useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -76,6 +77,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,9 +101,8 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-                <img src={MikasaLogo} alt="Mikasa Logo" width="50" height="50" />
-                MiKasa
+          <Typography variant="h6" noWrap component="div" onClick={() => navigate('')}>
+            MiKasa
           </Typography>
         </Toolbar>
       </AppBar>
@@ -125,25 +126,24 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-  {[
-    { text: 'Search', link: '/search', icon: <SearchIcon /> },
-    { text: 'My Profile', link: '/profile', icon: <AccountCircleIcon /> },
-    { text: 'About Us', link: '/about', icon: <InfoIcon /> },
-  ].map((item) => (
-    <ListItem key={item.text} disablePadding>
-      <ListItemButton component={Link} to={item.link}>
-        <ListItemIcon>{item.icon}</ListItemIcon>
-        <ListItemText primary={item.text} />
-      </ListItemButton>
-    </ListItem>
-  ))}
-</List>
+          {[
+            { text: 'Home', link: '', icon: <HomeIcon /> },
+            { text: 'Search', link: '/search', icon: <SearchIcon /> },
+            { text: 'My Profile', link: '/profile', icon: <AccountCircleIcon /> },
+            { text: 'About Us', link: '/about', icon: <InfoIcon /> },
+          ].map((item) => (
+            <ListItem key={item.text} disablePadding>
+              <ListItemButton component={Link} to={item.link}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
         <Divider />
-        
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-    
       </Main>
     </Box>
   );

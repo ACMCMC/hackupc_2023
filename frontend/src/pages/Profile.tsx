@@ -8,19 +8,19 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '80vh'
-      }}
-    >
-      <Typography variant="h4" component="h4" gutterBottom>
-        Loading...
-      </Typography>
-    </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '80vh'
+        }}
+      >
+        <Typography variant="h4" component="h4" gutterBottom>
+          Loading...
+        </Typography>
+      </Box>
     );
   }
   /*
@@ -42,7 +42,9 @@ const Profile = () => {
       }}
     >
       {isAuthenticated ? (
-        <Card>
+        <Card
+          variant="outlined"
+        >
           <Box
             sx={{
               backgroundImage: `url(${user?.picture})`,
@@ -61,11 +63,23 @@ const Profile = () => {
           </Box>
         </Card>
       ) : (
-        <Card>
-          <Typography variant="h4" component="h4" gutterBottom>
-            You're not logged in!
-          </Typography>
-          <LoginButton></LoginButton>
+        <Card
+          variant="outlined"
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            padding={4}
+          >
+            <Typography variant="h4" component="h4" gutterBottom>
+              You're not logged in!
+            </Typography>
+            <LoginButton></LoginButton>
+          </Box>
         </Card>
       )
       }

@@ -7,6 +7,8 @@ import { Box, Collapse, List, Stack, TextField, Typography, easing } from "@mui/
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
 
+var chipKey = 0;
+
 export const SearchPage = () => {
   const [houses, setHouses] = useState<House[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -17,13 +19,32 @@ export const SearchPage = () => {
   };
 
   const addChip = (label: string) => {
+    var trimmedLabel = label.trim();
+    if (trimmedLabel === '')
+      return; // don't add empty chips
+
+    var newChip = {
+      key: chipKey++,
+      label: trimmedLabel,
+    }
+
     setChipData((chips) => [
       ...chips,
-      {
-        key: chips.length,
-        label: label,
-      },
+      newChip
     ]);
+
+    // Set a timeout to add a word to the chip
+    setTimeout(() => {
+      newChip.label += ' word ';
+      setChipData((chips) => {
+        // Find the index of the chip we just added
+        var index = chips.findIndex((chip) => chip.key === newChip.key);
+        // Replace the chip with the new chip
+        chips[index] = newChip;
+        return chips;
+      });
+    }, 1000);
+
     setSearchTerm('');
   };
 
