@@ -2,11 +2,10 @@ package src
 
 // for elastic search
 
-type  struct {
-
+type ESIngest  struct {
+	Params []string `json:params`
 }
 
-func
 
 
 
