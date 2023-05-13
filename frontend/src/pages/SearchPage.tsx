@@ -3,11 +3,38 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Container, Box, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
+import ChipArray, { ChipData } from "../Components/ChipArray";
 
 export const SearchPage = () => {
   const [houses, setHouses] = useState<House[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [chipData, setChipData] = React.useState<ChipData[]>([]);
+
+  const handleDelete = (chipToDelete: ChipData) => () => {
+    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+  };
+
+  const addChip = (label: string) => {
+    setChipData((chips) => [
+      ...chips,
+      {
+        key: chips.length,
+        label: label,
+      },
+    ]);
+    setSearchTerm('');
+  };
+
+  const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === ' ' || event.key === 'Enter') {
+        addChip(searchTerm)
+    }
+  }
 
   useEffect(() => {
     //const fetchHouses = async () => {
@@ -45,12 +72,6 @@ export const SearchPage = () => {
     setHouses(data);
   }, []);
 
-  const handleSearchTermChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchTerm(event.target.value);
-  };
-
   const filteredHouses = houses.filter((house) => {
     return house.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
@@ -69,9 +90,11 @@ export const SearchPage = () => {
         variant="outlined"
         type="text"
         placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearchTermChange}
+        value= {searchTerm}
+        onChange={handleTextFieldChange}
+        onKeyDown={handleKeyDown}
       />
+      <ChipArray chips={chipData} handleDelete={handleDelete}></ChipArray>
       <div className="row">
         {filteredHouses.map((house) => {
           return (
