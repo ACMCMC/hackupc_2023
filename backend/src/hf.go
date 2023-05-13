@@ -13,6 +13,10 @@ type FlanQuery struct  {
 	QueryString string
 }
 
+type HFIngest struct {
+	Params []string `json:params`
+}
+
 
 func FlanHF(fq FlanQuery) string {
 
@@ -42,3 +46,5 @@ func FlanHF(fq FlanQuery) string {
 	sb := string(body)
 	return sb
 }
+
+
