@@ -1,9 +1,11 @@
 import React from "react";
-import { Box, Grid, TextField} from '@mui/material';
+import { Box, ButtonGroup, Grid, TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import LandingPhoto from '../static/images/LandingPage.jpg';
 import { Container } from "@mui/system";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 function Login() {
   const { loginWithRedirect, logout } = useAuth0();
@@ -20,12 +22,12 @@ function Login() {
     height: '100vh',
   };
   return (
-      <Container style={containerStyle}>
-          <div>
-          <Button variant="contained" onClick={() => loginWithRedirect()}>Login</Button>
-          <Button variant="contained" onClick={() => logout()}>Logout</Button>
-          </div>
-        </Container>
+    <Container style={containerStyle}>
+      <ButtonGroup variant="contained" aria-label="outlined primary button group">
+        <LoginButton></LoginButton>
+        <LogoutButton></LogoutButton>
+      </ButtonGroup>
+    </Container>
   );
 }
 

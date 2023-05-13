@@ -19,7 +19,6 @@ import { createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { Auth0Provider } from '@auth0/auth0-react';
 import Profile from './pages/Profile';
-import LoginButton from './LoginButton';
 //load from .env file, use env variables
 const REACT_APP_AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN as string;
 const REACT_APP_AUTH0_CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENT_ID as string;
