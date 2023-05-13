@@ -25,7 +25,11 @@ jobs:
     - name: Build
       run: go build -v ./...
       working-directory: ./backend
+      env:
+        CI: false
 
     - name: Test -v ./...
       run: go test
       working-directory: ./backend
+      env:
+        CI: false
