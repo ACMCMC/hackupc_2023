@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginButton from './LoginButton';
+import LogOut from './LogOut';
 import logo from './logo.svg';
 import './App.css';
 //import 'bootstrap/dist/css/bootstrap.css';
@@ -33,18 +34,12 @@ function App() {
   );
 }
 
-
+/*
 ReactDOM.render(
-  <Auth0Provider
-    domain="dev-nblj3d35g16682v5.us.auth0.com"
-    clientId="mZ2bRVklXaYCIylvEtQQ4pHPTyXAQQez"
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
-  >
+  
     <App />
   </Auth0Provider>,
   document.getElementById("root")
 );
-
+*/
 export default App;
