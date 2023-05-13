@@ -6,11 +6,42 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import MainComponent from './Components/MainComponent';
 import Login from './Components/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
+import { ThemeProvider } from '@emotion/react';
+import { orange, green } from '@mui/material/colors';
+import { ThemeOptions } from '@mui/material/styles';
+import NavbarComponent from './Components/NavbarComponent';
+import FooterComponent from './Components/FooterComponent';
+import { createTheme } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: orange[500],
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
 
 
 const router = createBrowserRouter([
@@ -38,9 +69,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    {router.state.location.pathname !== '/login' ? <div>NAVBAR</div> : <></>}
-    <RouterProvider router={router} />
-    <footer>ABC</footer>
+    <ThemeProvider theme={theme}>
+      {router.state.location.pathname !== '/login' ? <NavbarComponent/> : <></>}
+      <RouterProvider router={router} />
+      <FooterComponent/>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

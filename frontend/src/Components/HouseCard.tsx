@@ -8,8 +8,8 @@
 
 import React from "react";
 import { House } from "../models/House";
-import { Card, Box } from '@mui/material';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { Box, Card } from '@mui/material';
+import ScoreIcon from '@mui/icons-material/Speed';
 import { alpha } from '@mui/material/styles';
 
 interface Props {
@@ -18,73 +18,65 @@ interface Props {
 
 export const HouseCard: React.FC<Props> = ({ house }) => {
     return (
-        <div>
-            <Card>
-                <img src={house.image} alt="House" />
-                <h1>{house.name}</h1>
-                <p>{house.price}</p>
-                <p>{house.description}</p>
-            </Card>
+        <Card
+            sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                alignItems: 'center',
+                bgcolor: 'background.paper',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                fontWeight: 'bold',
+            }}
+            variant="outlined"
+        >
+            <Box
+                component="img"
+                sx={{
+                    height: 233,
+                    width: 350,
+                    maxHeight: { xs: 233, md: 167 },
+                    maxWidth: { xs: 350, md: 250 },
+                }}
+                alt="The house from the offer."
+                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+            />
             <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: { xs: 'column', md: 'row' },
-                    alignItems: 'center',
-                    bgcolor: 'background.paper',
-                    overflow: 'hidden',
-                    borderRadius: '12px',
-                    boxShadow: 1,
-                    fontWeight: 'bold',
+                    flexDirection: 'column',
+                    alignItems: { xs: 'center', md: 'flex-start' },
+                    m: 3,
+                    minWidth: { md: 350 },
                 }}
             >
-                <Box
-                    component="img"
-                    sx={{
-                        height: 233,
-                        width: 350,
-                        maxHeight: { xs: 233, md: 167 },
-                        maxWidth: { xs: 350, md: 250 },
-                    }}
-                    alt="The house from the offer."
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
-                />
+                <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
+                    {house.address}
+                </Box>
+                <Box component="span" sx={{ color: 'primary.main', fontSize: 22 }}>
+                    € {house.price}
+                </Box>
                 <Box
                     sx={{
+                        mt: 1.5,
+                        p: 0.5,
+                        backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.1),
+                        borderRadius: '5px',
+                        color: (theme) => alpha(theme.palette.secondary.main, 1),
+                        fontWeight: 'medium',
                         display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: { xs: 'center', md: 'flex-start' },
-                        m: 3,
-                        minWidth: { md: 350 },
+                        fontSize: 12,
+                        alignItems: 'center',
+                        '& svg': {
+                            fontSize: 21,
+                            mr: 0.5,
+                        },
                     }}
                 >
-                    <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                        123 Main St, Phoenix AZ
-                    </Box>
-                    <Box component="span" sx={{ color: 'primary.main', fontSize: 22 }}>
-                        $280,000 — $310,000
-                    </Box>
-                    <Box
-                        sx={{
-                            mt: 1.5,
-                            p: 0.5,
-                            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.1),
-                            borderRadius: '5px',
-                            color: 'primary.main',
-                            fontWeight: 'medium',
-                            display: 'flex',
-                            fontSize: 12,
-                            alignItems: 'center',
-                            '& svg': {
-                                fontSize: 21,
-                                mr: 0.5,
-                            },
-                        }}
-                    >
-                        <ErrorOutlineIcon />
-                        CONFIDENCE SCORE 85%
-                    </Box>
+                    <ScoreIcon />
+                    MATCH SCORE: 80%
                 </Box>
             </Box>
-        </div>
+        </Card>
     );
 };
