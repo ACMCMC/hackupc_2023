@@ -8,7 +8,7 @@ import { Container } from "@mui/system";
 //}
 
 function AuthenticateUser() {
-    /* create a login page with a button that redirects to the auth0 login page */
+    // create a login page with a button that redirects to the auth0 login page /
     // const { loginWithRedirect } = useAuth0();
 
     const [user, setUser] = React.useState<string>('');
@@ -68,3 +68,5 @@ function AuthenticateUser() {
 
 
 export default AuthenticateUser;
+
+
