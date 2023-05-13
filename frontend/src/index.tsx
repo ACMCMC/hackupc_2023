@@ -10,6 +10,7 @@ import MainComponent from './Components/MainComponent';
 import Login from './Components/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
+import SearchPage from './pages/SearchPage';
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <UserFind></UserFind>,
+  },
+  {
+    path: "/search",
+    element: <SearchPage></SearchPage>,
   },
 ]);
 

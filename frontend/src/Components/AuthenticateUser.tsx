@@ -6,10 +6,13 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   TextBox: {
-    backgroundColor: 'red',
-    color: 'red',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent:"center",
+    backgroundColor: 'white',
+    color: 'black',
     '&:hover': {
-      backgroundColor: 'darkred',
+      backgroundColor: 'lightgrey',
     },
   },
 });
@@ -23,7 +26,9 @@ function AuthenticateUser(){
         console.log(user,password);
       };
     return(
-      
+      <Grid container direction="row" justifyContent="center" alignItems="center" minHeight="100vh">
+      <Grid item xs={10} sm={8} md={4}>
+        <Box padding="2rem">
       <div>
         <TextField
           className={classes.TextBox}
@@ -39,8 +44,12 @@ function AuthenticateUser(){
           value={password}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setPassword(event.target.value); }} />
-          <Button variant="contained" disabled={!(user&&password)} onClick={handleOnClick}>Login</Button>  
+          <Button variant="contained" disabled={!(user&&password)} onClick={handleOnClick}>Login</Button>
       </div>
+      </Box>
+      </Grid>
+      </Grid>
+      
     );
 }
    
