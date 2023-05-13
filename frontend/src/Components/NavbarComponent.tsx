@@ -20,6 +20,7 @@ import MikasaLogo from '../static/images/MikasaLogo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import InfoIcon from '@mui/icons-material/Info';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -124,19 +125,19 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Search', 'My Profile', 'About Us'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                {index === 0 && <SearchIcon />}
-                {index === 1 && <AccountCircleIcon />}
-                {index === 2 && <InfoIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+  {[
+    { text: 'Search', link: '/search', icon: <SearchIcon /> },
+    { text: 'My Profile', link: '/profile', icon: <AccountCircleIcon /> },
+    { text: 'About Us', link: '/about', icon: <InfoIcon /> },
+  ].map((item) => (
+    <ListItem key={item.text} disablePadding>
+      <ListItemButton component={Link} to={item.link}>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.text} />
+      </ListItemButton>
+    </ListItem>
+  ))}
+</List>
         <Divider />
         
       </Drawer>
