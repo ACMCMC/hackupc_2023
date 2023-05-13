@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"github.com/joho/godotenv"
+	"elastic/go-elasticsearch"
 )
 
 const (
@@ -47,9 +49,19 @@ func pushML(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+
 func main() {
+	// (int) port gets converted to a string
 	port := strconv.Itoa(PORT)
 
+	// err handling when trying to get
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf(".env file: %s", err.Error)
+	}
+
+	
+	
 	// fs := http.File
 
 	http.HandleFunc("/",root)
