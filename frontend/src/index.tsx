@@ -16,6 +16,7 @@ import { ThemeOptions } from '@mui/material/styles';
 import NavbarComponent from './Components/NavbarComponent';
 import FooterComponent from './Components/FooterComponent';
 import { createTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -70,9 +71,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
-      <RouterProvider router={router} />
-      <FooterComponent />
+      <Box minHeight={'100vh'}>
+        {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
+        <RouterProvider router={router} />
+        <Box>
+          <FooterComponent />
+        </Box>
+      </Box>
     </ThemeProvider>
   </React.StrictMode>
 );
