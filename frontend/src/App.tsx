@@ -36,16 +36,15 @@ function App() {
 
 ReactDOM.render(
   <Auth0Provider
-    domain="dev-nblj3d35g16682v5.us.auth0.com"
+    domain="https://mikasa.tech/"
     clientId="mZ2bRVklXaYCIylvEtQQ4pHPTyXAQQez"
     authorizationParams={{
-	redirect_uri: window.location.origin
+      redirect_uri: window.location.origin
     }}
   >
-
-  <App />
-
-  </Auth0Provider>, document.getElementById("root")
+    <App />
+  </Auth0Provider>,
+  document.getElementById("root")
 );
 
 export default App;
