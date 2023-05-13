@@ -4,8 +4,8 @@ import { Button } from '@mui/material';
 import LandingPhoto from '../static/images/LandingPage.jpg';
 import { Container } from "@mui/system";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import LoginButton from "../Components/LoginButton";
+import LogoutButton from "../Components/LogoutButton";
 
 function Login() {
   const { loginWithRedirect, logout } = useAuth0();

@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Login from './Components/LandingPage';
+import Login from './pages/LandingPage';
 import AuthenticateUser from './Components/AuthenticateUser';
 import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
