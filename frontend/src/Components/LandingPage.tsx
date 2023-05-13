@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Grid, TextField} from '@mui/material';
 import { Button } from '@mui/material';
 import LandingPhoto from '../static/images/LandingPage.jpg';
+import { Container } from "@mui/system";
 
 function Login() {
   /* create a login page with a button that redirects to the auth0 login page */
@@ -9,23 +10,18 @@ function Login() {
   const handleOnClick = () => {
     console.log(text);
   };
+  const containerStyle = {
+    backgroundImage: `url(${LandingPhoto})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+  };
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
-    >
-      <Grid item xs={10} sm={8} md={4}>
-        <Box padding="2rem">
+      <Container style={containerStyle}>
           <div>
-            <img src={LandingPhoto} alt="logo" />
           <Button variant="contained" onClick={handleOnClick}>Login</Button>
           </div>
-        </Box>
-      </Grid>
-    </Grid>
+        </Container>
   );
 }
 
