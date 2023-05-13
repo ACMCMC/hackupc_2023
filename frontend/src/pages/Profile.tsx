@@ -25,6 +25,11 @@ const Profile = () => {
         <p>{user?.email}</p>
       </div>
     )}
+    {!isAuthenticated && (
+      <div>
+        Not authenticated
+      </div>
+    )}
     </>
   );
 };

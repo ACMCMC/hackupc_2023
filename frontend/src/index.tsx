@@ -81,26 +81,28 @@ const root = ReactDOM.createRoot(
 );
 // load the domain and client id from the .env file
 root.render(
-  <React.StrictMode>
+  
     <Auth0Provider
     domain={REACT_APP_AUTH0_DOMAIN}
     clientId={REACT_APP_AUTH0_CLIENT_ID}
+
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
   >
+    <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Box minHeight={'100vh'}>
         {router.state.location.pathname !== '/login' ? <NavbarComponent /> : <></>}
         <RouterProvider router={router} />
         <Box>
-          <LoginButton />
           <FooterComponent />
         </Box>
       </Box>
     </ThemeProvider>
-    </Auth0Provider>
+    
   </React.StrictMode>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
