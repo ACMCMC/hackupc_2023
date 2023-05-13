@@ -8,8 +8,6 @@ import {
   RouterProvider
 } from "react-router-dom";
 import Login from './pages/LandingPage';
-import AuthenticateUser from './Components/AuthenticateUser';
-import UserFind from './Components/InputWrapper';
 import SearchPage from './pages/SearchPage';
 
 import { ThemeProvider } from '@emotion/react';
