@@ -18,8 +18,8 @@ jobs:
 
     - name: Set up Go
       uses: actions/setup-go@v3
-      working-directory: ./backend
       with:
+        working-directory: ./backend
         go-version: 1.19
 
     - name: Build
