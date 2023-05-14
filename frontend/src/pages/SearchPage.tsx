@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Box, Collapse, List, Stack, TextField, Typography, easing } from "@mui/material";
+import { Box, Card, Checkbox, Collapse, FormControlLabel, FormGroup, Grid, List, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
+import { getCompletion, getHouses } from "../api/api";
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 var chipKey = 0;
 
@@ -23,9 +25,10 @@ export const SearchPage = () => {
     if (trimmedLabel === '')
       return; // don't add empty chips
 
-    var newChip = {
+    const newChip = {
       key: chipKey++,
       label: trimmedLabel,
+      completed: false
     }
 
     setChipData((chips) => [
@@ -33,17 +36,23 @@ export const SearchPage = () => {
       newChip
     ]);
 
-    // Set a timeout to add a word to the chip
-    setTimeout(() => {
-      newChip.label += ' word ';
+    getCompletion(trimmedLabel).then((response) => {
       setChipData((chips) => {
-        // Find the index of the chip we just added
+        // Find the index of the chip with the same key as the new chip
         var index = chips.findIndex((chip) => chip.key === newChip.key);
         // Replace the chip with the new chip
-        chips[index] = newChip;
-        return chips;
+        // Do a copy of the array so that React will rerender
+        const newChips = chips.slice();
+        newChips[index] = {
+          key: newChip.key,
+          label: response + ' ' + newChip.label,
+          completed: true
+        };
+        return newChips;
       });
-    }, 1000);
+    }).catch((error) => {
+      console.log(error);
+    });
 
     setSearchTerm('');
   };
@@ -59,29 +68,18 @@ export const SearchPage = () => {
   }
 
   useEffect(() => {
-    //const fetchHouses = async () => {
-    //const response = await fetch('https://www.anapioficeandfire.com/api/houses');
-    //const data = await response.json();
-    const example = {
-      address: "123 Main St",
-      name: "House 1",
-      price: 100000,
-      description: "This is a house",
-      image:
-        "https://images.unsplash.com/photo-1584395630824-9d9d0d6b9b5c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
-      id: 1,
-    }
-    // Data is a list of num_examples examples
-    const num_examples = chipData.length + 1;
-    var data: House[] = [];
-    for (let i = 0; i < num_examples; i++) {
-      // copy the example into a new object and then change the id
-      var exampleAdapted = JSON.parse(JSON.stringify(example));
-      exampleAdapted.id = i;
-      data.push(exampleAdapted);
-    }
+    // All chips need to be completed before we can filter houses
+    var allChipsCompleted = chipData.every((chip) => chip.completed);
+    if (!allChipsCompleted || chipData.length === 0)
+      return;
 
-    setHouses(data);
+    var labels = chipData.map((chip) => chip.label);
+    getHouses(labels, false, false, 'score').then((response) => {
+      setHouses([]);
+      //setHouses(response);
+    }).catch((error) => {
+      console.log(error);
+    });
   }, [chipData]);
 
   return (
@@ -103,22 +101,45 @@ export const SearchPage = () => {
         onKeyDown={handleKeyDown}
       />
       <ChipArray chips={chipData} handleDelete={handleDelete}></ChipArray>
-      <Stack direction="column" spacing={4}>
-        <TransitionGroup>
-          {houses.map((house) =>
-            <Collapse key={house.id}>
-              <Box
-                sx={{
-                  marginBottom: 4,
-                }}
-              >
-                <HouseCard house={house} />
-              </Box>
-            </Collapse>
-          )}
-        </TransitionGroup>
-      </Stack>
-    </Box>
+      <Grid container spacing={{md: 2}}>
+        <Grid item xs={12} md={4}>
+          <Card sx={{ width: { xs: '100%', md: 275 } }}
+            variant="outlined"
+          >
+            <Box sx={{ display: 'flex', justifyContent: 'left' }}
+              paddingTop={4} paddingX={2}>
+              <Typography typography='h5' variant="h5">Filters</Typography>
+            </Box>
+            <Box sx={{ display: 'flex' }}
+              padding={2}>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="Student" />
+                <FormControlLabel control={<Checkbox />} label="Sustainable" />
+              </FormGroup>
+            </Box>
+          </Card>
+        </Grid>
+
+
+        <Grid item xs={12} md={8}>
+          <Stack direction="row" spacing={4}>
+            <TransitionGroup>
+              {houses.map((house) =>
+                <Collapse key={house.id}>
+                  <Box
+                    sx={{
+                      marginBottom: 4,
+                    }}
+                  >
+                    <HouseCard house={house} />
+                  </Box>
+                </Collapse>
+              )}
+            </TransitionGroup>
+          </Stack>
+        </Grid>
+      </Grid>
+    </Box >
   );
 };
 
