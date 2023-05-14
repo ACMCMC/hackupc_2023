@@ -13,7 +13,10 @@ type FlanQuery struct  {
 	QueryString string
 }
 type HFIngest struct {
-	Params []string `json:params`
+	Params []string `json:"params"`
+	ForStudents bool `json:"forStudents"` // elastic search 
+	Sustainable bool `json:"sustainable"` // elastic search
+	OrderBy string `json:"orderBy"`
 }
 
 
