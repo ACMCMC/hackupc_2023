@@ -14,7 +14,7 @@ jobs:
       uses: microsoft/InclusivenessAnalyzer@v1.0.1
       with:
         # Fails the step if a non-inclusive term is found
-        failOnNonInclusiveTerm: false
+        failOnNonInclusiveTerm: true
         # Only scan files added or modified in last commit when checkout step has "with: fetch-depth: 2" configured
-        excludeUnchangedFiles: false
+        excludeUnchangedFiles: true
         excludeFiles: '**/package.json,**/package-lock.json'
