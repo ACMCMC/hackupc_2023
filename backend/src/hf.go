@@ -12,7 +12,6 @@ type FlanQuery struct  {
 	Endp string
 	QueryString string
 }
-
 type HFIngest struct {
 	Params []string `json:params`
 }
