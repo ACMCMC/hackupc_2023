@@ -109,7 +109,6 @@ func init() {
 func main() {
 	// (int) port gets converted to a string
 	port := strconv.Itoa(PORT)
-
 	http.HandleFunc("/",root)
 	// http.HandleFunc("/authorize",authorize)
 	http.HandleFunc("/getHouses", getHouses)
