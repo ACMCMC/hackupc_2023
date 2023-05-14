@@ -1,8 +1,10 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+
+import { Box, Button, Stack, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import LoginButton from "../Components/LoginButton";
 import LogoutButton from "../Components/LogoutButton";
+import LandingPhoto from '../static/images/LandingPage2.jpg';
 
 const AboutUs = () => {
   var { user, isAuthenticated, isLoading, logout } = useAuth0();
@@ -24,69 +26,33 @@ const AboutUs = () => {
       </Box>
     );
   }
-  /*
-    isAuthenticated = true;
-    user = {
-      name: "abc",
-      email: "hdkeurh",
-      picture: "fhkreyhfgki"
-    }
-  */
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '80vh'
-      }}
-    >
-      {isAuthenticated ? (
-        <Card
-          variant="outlined"
-        >
-          <CardMedia
-            sx={{ height: 140 }}
-            image={user?.picture}
-          />
-          <CardContent>
-            <Box
-              sx={{
-                //padding: { xs: 2, md: 4 },
-              }}
-            >
-              <Typography><b>Name:</b> {user?.name}</Typography>
-              <Typography><b>Email:</b> {user?.email}</Typography>
-            </Box>
-          </CardContent>
-          <CardActions>
-            <Button variant="text">Logout</Button>
-          </CardActions>
-        </Card>
-      ) : (
-        <Card
-          variant="outlined"
+
+    return (
+        <Box
+          width={'100%'}
         >
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
+              backgroundImage: `url(${LandingPhoto})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
-            padding={4}
-          >
-            <Typography variant="h4" component="h4" gutterBottom>
-              You're not logged in!
+            height={{ xs: '35vh', md: '25vh' }}
+          ></Box>
+            <Stack spacing={2} direction="column" justifyContent="center" alignItems="center" marginY={{xs: 4, md: 8}}>
+            <Typography variant="h4" component="h4" marginBottom={4}>
+              Let MiKasa think on behalf of you!
             </Typography>
-            <LoginButton></LoginButton>
-          </Box>
-        </Card>
-      )
-      }
-    </Box >
-  );
+            <Typography variant="h6" component="h6" marginBottom={8}>
+              Why are we the best way to find your next home?
+              Out frontier AI technology will help you find the best home for you!
+              All you need to do is to tell us what you want and we will do the rest!
+              Easy to use website with a simple and intuitive interface will make sure you find your next home in no time!
+              Just tell us more about yourself, your hobbies and your interests. After that MiKasa AI will anylise the real estate market and available properties to find a dream house that is suitable for you the most! 
+            </Typography>
+            </Stack>
+        </Box>
+      );
 };
 
 export default AboutUs;
