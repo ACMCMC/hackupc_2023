@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Box, Card, Checkbox, Collapse, FormControlLabel, FormGroup, List, Stack, TextField, Typography, easing } from "@mui/material";
+import { Box, Card, Checkbox, Collapse, FormControlLabel, FormGroup, Grid, List, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
 import { getCompletion, getHouses } from "../api/api";
@@ -101,37 +101,45 @@ export const SearchPage = () => {
         onKeyDown={handleKeyDown}
       />
       <ChipArray chips={chipData} handleDelete={handleDelete}></ChipArray>
-      <Stack direction="row" spacing={4}>
-        <Stack direction="column">
-        <Card sx={{ minWidth: 275 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <h2>Filters</h2>
-      </Box>
-      <Box sx={{ display: 'flex', paddingLeft:'1vh'}}>
-        <FormGroup>
-          <FormControlLabel control={<Checkbox />} label="Student" />
-          <FormControlLabel control={<Checkbox />} label="Sustainable" />
-        </FormGroup>
-        </Box>
-        </Card>
-          
-        </Stack>
-      
-        <TransitionGroup>
-          {houses.map((house) =>
-            <Collapse key={house.id}>
-              <Box
-                sx={{
-                  marginBottom: 4,
-                }}
-              >
-                <HouseCard house={house} />
-              </Box>
-            </Collapse>
-          )}
-        </TransitionGroup>
-      </Stack>
-    </Box>
+      <Grid container spacing={{md: 2}}>
+        <Grid item xs={12} md={4}>
+          <Card sx={{ width: { xs: '100%', md: 275 } }}
+            variant="outlined"
+          >
+            <Box sx={{ display: 'flex', justifyContent: 'left' }}
+              paddingTop={4} paddingX={2}>
+              <Typography typography='h5' variant="h5">Filters</Typography>
+            </Box>
+            <Box sx={{ display: 'flex' }}
+              padding={2}>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="Student" />
+                <FormControlLabel control={<Checkbox />} label="Sustainable" />
+              </FormGroup>
+            </Box>
+          </Card>
+        </Grid>
+
+
+        <Grid item xs={12} md={8}>
+          <Stack direction="row" spacing={4}>
+            <TransitionGroup>
+              {houses.map((house) =>
+                <Collapse key={house.id}>
+                  <Box
+                    sx={{
+                      marginBottom: 4,
+                    }}
+                  >
+                    <HouseCard house={house} />
+                  </Box>
+                </Collapse>
+              )}
+            </TransitionGroup>
+          </Stack>
+        </Grid>
+      </Grid>
+    </Box >
   );
 };
 
