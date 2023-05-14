@@ -19,6 +19,7 @@ import { createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { Auth0Provider } from '@auth0/auth0-react';
 import Profile from './pages/Profile';
+import AboutUs from './pages/AboutUs';
 //load from .env file, use env variables
 // load the variables from the .env file
 const REACT_APP_AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN as string;
@@ -74,6 +75,10 @@ const router = createBrowserRouter([{
     {
       path: "/profile",
       element: <Profile></Profile>,
+    },
+    {
+      path: "/aboutus",
+      element: <AboutUs></AboutUs>,
     },
   ]
 }]);
