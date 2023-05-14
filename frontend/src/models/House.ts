@@ -13,4 +13,5 @@ export interface House {
     description: string;
     price: number;
     image: string;
+    rooms_and_appliances: Map<string, string[]>;
 }

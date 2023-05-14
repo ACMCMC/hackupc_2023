@@ -68,7 +68,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
         >
 
             <CardMedia
-                src={'https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/261286__000.jpg'}
+                src={house.image}
                 title="Image of the house"
                 sx={{
                     height: 233,
