@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Typography } from "@mui/material";
 import LoginButton from "../Components/LoginButton";
 import LogoutButton from "../Components/LogoutButton";
 
@@ -18,9 +18,7 @@ const Profile = () => {
           height: '80vh'
         }}
       >
-        <Typography variant="h4" component="h4" gutterBottom>
-          Loading...
-        </Typography>
+      <CircularProgress />
       </Box>
     );
   }
@@ -61,7 +59,7 @@ const Profile = () => {
             </Box>
           </CardContent>
           <CardActions>
-            <Button variant="text">Logout</Button>
+            <Button variant="text" onClick={() => logout()}>Logout</Button>
           </CardActions>
         </Card>
       ) : (
