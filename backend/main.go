@@ -103,9 +103,7 @@ func getCompletion(w http.ResponseWriter, r *http.Request) {
 		text := query.Get("text")
 
 
-		complPrompt := `Prompt:
-
-For each noun, write the corresponding verb.
+		complPrompt := `For each noun, write the corresponding verb.
 ## Example 1: book
 Anwser: read
 ## Example 2: coffee
@@ -148,6 +146,56 @@ Answer: watch
 }
 
 
+func getHouseHumanDescription(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	
+	switch r.Method {
+	case "POST":
+		
+		r.ParseForm()
+
+		var params src.HFIngest
+
+		err := json.NewDecoder(r.Body).Decode(&params)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		defer r.Body.Close()
+
+		input := fmt.Sprintf("Here is some data:\n%s\n\nWrite a sentence that describes this data.", params.Params)
+		fmt.Println(input)
+		postBod, err := json.Marshal(map[string]string{
+			"inputs":input,
+		})
+
+		if err != nil {
+			log.Fatalf("%v", err)
+		}
+
+		respBod := bytes.NewBuffer(postBod)
+		
+		resp, err := http.Post(os.Getenv("HF_ENDP_COMPL"), "application/json", respBod)
+
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		sb := string(body)
+			
+		fmt.Fprintf(w,sb)
+		
+	case "default":
+		fmt.Fprintf(w, "bruh what is we doing")
+	}
+}
 
 func init() {
 	// err handling when trying to get

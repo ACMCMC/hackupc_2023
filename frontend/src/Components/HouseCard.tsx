@@ -113,7 +113,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                         <ScoreIcon />
                         MATCH SCORE: 80%
                     </Box>
-                    <Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
+                    {/*<Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
                         <Rating
                             name="hover-feedback"
                             value={value}
@@ -130,7 +130,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                         {value !== null && (
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                         )}
-                    </Stack>
+                    </Stack>*/}
                     <Fade in={generatingDescription}>
                     <Box sx={{ width: '100%' }} marginTop={4} hidden={generatedDescription !== null || !generatingDescription}>
                         <LinearProgress />
