@@ -314,6 +314,7 @@ func main() {
 	// (int) port gets converted to a string
 	//getData("testingresource123","testingquery")
 	//insertData("testingresource","testingquery","testingresult")
+	getCompletion("testingresource","testingquery")
 	port := strconv.Itoa(PORT)
 	http.HandleFunc("/",root)
 	http.HandleFunc("/getAppliances", getHouses)
