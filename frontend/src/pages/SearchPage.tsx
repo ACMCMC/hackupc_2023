@@ -11,8 +11,20 @@ import { alignProperty } from "@mui/material/styles/cssUtils";
 
 var chipKey = 0;
 
+const fakeHouse: House = {
+  id: 0,
+  name: 'Fake House',
+  address: '123 Fake Street',
+  price: 1000,
+  description: 'This is a fake house',
+  /*score: 1000,
+  student: false,
+  sustainable: false,*/
+  image: 'abc',
+}
+
 export const SearchPage = () => {
-  const [houses, setHouses] = useState<House[]>([]);
+  const [houses, setHouses] = useState<House[]>([fakeHouse]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [chipData, setChipData] = React.useState<ChipData[]>([]);
   const [sorting, setSorting] = useState<string>("1");
@@ -76,7 +88,7 @@ export const SearchPage = () => {
 
     var labels = chipData.map((chip) => chip.label);
     getHouses(labels, false, false, 'score').then((response) => {
-      setHouses([]);
+      setHouses([fakeHouse]);
       //setHouses(response);
     }).catch((error) => {
       console.log(error);

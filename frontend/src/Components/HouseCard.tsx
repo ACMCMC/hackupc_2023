@@ -8,7 +8,7 @@
 
 import React from "react";
 import { House } from "../models/House";
-import { Box, Card, Rating } from '@mui/material';
+import { Box, Card, Fade, Grow, Rating, Stack, Typography } from '@mui/material';
 import ScoreIcon from '@mui/icons-material/Speed';
 import StarIcon from '@mui/icons-material/Star';
 import { alpha } from '@mui/material/styles';
@@ -19,25 +19,33 @@ interface Props {
 }
 
 const labels: { [index: string]: string } = {
-  0.5: 'Useless',
-  1: 'Useless+',
-  1.5: 'Poor',
-  2: 'Poor+',
-  2.5: 'Ok',
-  3: 'Ok+',
-  3.5: 'Good',
-  4: 'Good+',
-  4.5: 'Excellent',
-  5: 'Excellent+',
+    0.5: 'Useless',
+    1: 'Useless+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Ok',
+    3: 'Ok+',
+    3.5: 'Good',
+    4: 'Good+',
+    4.5: 'Excellent',
+    5: 'Excellent+',
 };
 
 function getLabelText(value: number) {
-  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+    return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
 export const HouseCard: React.FC<Props> = ({ house }) => {
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
+    const [generatedDescription, setGeneratedDescription] = React.useState<string | null>(null);
+
+    // After 2 seconds, generate a description for the house
+    React.useEffect(() => {
+        setTimeout(() => {
+            setGeneratedDescription("This is a nice house.");
+        }, 2000);
+    }, []);
 
     const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
 
@@ -104,6 +112,8 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 >
                     <ScoreIcon />
                     MATCH SCORE: 80%
+                </Box>
+                <Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
                     <Rating
                         name="hover-feedback"
                         value={value}
@@ -120,7 +130,10 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                     {value !== null && (
                         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                     )}
-                </Box>
+                </Stack>
+                <Fade in={generatedDescription !== null}>
+                    <Typography component={'p'}>{generatedDescription}</Typography>
+                </Fade>
             </Box>
         </Card>
     );
