@@ -11,6 +11,7 @@ import { Grow } from '@mui/material';
 export interface ChipData {
   key: number;
   label: string;
+  completed: boolean;
 }
 
 interface ChipArrayProps {
