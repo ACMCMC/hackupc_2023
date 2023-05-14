@@ -41,6 +41,7 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 		// paramParse := r.FormValue("params")
 		// err := json.Unmarshal([]byte(paramParse),&params)
 
+
 		err := json.NewDecoder(r.Body).Decode(&params)
 		if err != nil {
 			fmt.Println(err)
@@ -63,11 +64,13 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(k, value)
 			}
 		}
+
 		prompts := []string{"Which of the following appliances are used to ",
 			"In which of the following rooms can be used to ",
 			"What should do when ",
 		}
 		*/
+
 
 
 		for _,param := range params.Params {

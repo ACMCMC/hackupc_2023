@@ -11,12 +11,17 @@ import { House } from "../models/House";
 import { Box, Card } from '@mui/material';
 import ScoreIcon from '@mui/icons-material/Speed';
 import { alpha } from '@mui/material/styles';
+import { useSpring, animated } from "react-spring";
 
 interface Props {
     house: House;
 }
 
 export const HouseCard: React.FC<Props> = ({ house }) => {
+    const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
+
+    //console.log(elevation);
+
     return (
         <Card
             sx={{
@@ -29,14 +34,17 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 fontWeight: 'bold',
             }}
             variant="outlined"
+            onMouseEnter={() => set({ elevation: 1 })}
+            onMouseLeave={() => set({ elevation: 0 })}
         >
+        
             <Box
                 component="img"
                 sx={{
                     height: 233,
-                    width: 350,
                     maxHeight: { xs: 233, md: 167 },
                     maxWidth: { xs: 350, md: 250 },
+                    objectFit: 'cover',
                 }}
                 alt="The house from the offer."
                 src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
@@ -51,7 +59,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 }}
             >
                 <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                    {house.address}
+                    #{house.id} | {house.address}
                 </Box>
                 <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
                     € {house.price}
