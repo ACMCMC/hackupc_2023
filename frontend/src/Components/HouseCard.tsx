@@ -8,16 +8,27 @@
 
 import React from "react";
 import { House } from "../models/House";
-import { Box, Card, CardContent, CardMedia, Fade, Grow, LinearProgress, Rating, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CardMedia, Fade, Grow, LinearProgress, Rating, Stack, Typography } from '@mui/material';
 import ScoreIcon from '@mui/icons-material/Speed';
 import StarIcon from '@mui/icons-material/Star';
 import { alpha } from '@mui/material/styles';
 import { useSpring, animated } from "react-spring";
 import { getReview } from "../api/api";
 
+import { useState } from "react";
+import SimpleDialog from './SimpleDialog';
+
 interface Props {
     house: House;
 }
+
+interface MyDialogProps {
+    open: boolean;
+    onClose: () => void;
+    title: string;
+    content: string;
+    actions: JSX.Element;
+  }
 
 const labels: { [index: string]: string } = {
     0.5: 'Useless',
@@ -32,6 +43,10 @@ const labels: { [index: string]: string } = {
     5: 'Excellent+',
 };
 
+function MyDialog(props: MyDialogProps) {
+
+}
+
 function getLabelText(value: number) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
@@ -41,6 +56,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
     const [hover, setHover] = React.useState(-1);
     const [generatedDescription, setGeneratedDescription] = React.useState<string | null>(null);
     const [generatingDescription, setGeneratingDescription] = React.useState<boolean>(false);
+    const [open, setOpen] = useState(false);
 
     const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
 
@@ -56,8 +72,16 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
         });
     };
 
+    const handleClose = () => {
+        setOpen(false);
+      };
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
     return (
-        <Card
+        <Card 
             sx={{
                 display: 'flex',
                 flexDirection: { xs: 'column', md: 'row' },
@@ -65,10 +89,12 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 bgcolor: 'background.paper',
                 overflow: 'hidden',
                 fontWeight: 'bold',
+                
             }}
             variant="outlined"
             onMouseEnter={() => generateDescription()}
             onMouseLeave={() => set({ elevation: 0 })}
+            
         >
 
             <CardMedia
