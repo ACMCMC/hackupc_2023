@@ -119,9 +119,7 @@ func getCompletion(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Printf("Data not found in cache")
 
-		complPrompt := `Prompt:
-
-For each noun, write the corresponding verb.
+		complPrompt := `For each noun, write the corresponding verb.
 ## Example 1: book
 Answer: read
 ## Example 2: coffee
@@ -164,6 +162,56 @@ Answer: watch
 }
 
 
+func getReview(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	
+	switch r.Method {
+	case "POST":
+		
+		r.ParseForm()
+
+		var params src.HFIngest
+
+		err := json.NewDecoder(r.Body).Decode(&params)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		defer r.Body.Close()
+
+		input := fmt.Sprintf("Here is some data:\n%s\n\nWrite a sentence that describes this data.", params.Params)
+		fmt.Println(input)
+		postBod, err := json.Marshal(map[string]string{
+			"inputs":input,
+		})
+
+		if err != nil {
+			log.Fatalf("%v", err)
+		}
+
+		respBod := bytes.NewBuffer(postBod)
+		
+		resp, err := http.Post(os.Getenv("HF_ENDP_COMPL"), "application/json", respBod)
+
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		sb := string(body)
+			
+		fmt.Fprintf(w,sb)
+		
+	case "default":
+		fmt.Fprintf(w, "bruh what is we doing")
+	}
+}
 func insertData(resource string, query string, result string) error {
     // Set up the database connection
     db, err := sql.Open("postgres", "postgres://ksbeiabwhtohbm:9f42d411affdaf0159e4361308518d5b1cdce7cd1178ce7c8f1c9022725c253f@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com/d5s4cc0i9uhpqe")
