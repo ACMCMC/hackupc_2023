@@ -107,11 +107,15 @@ export const SearchPage = () => {
       <Stack direction="row" spacing={4}>
         <Stack direction="column">
         <Card sx={{ minWidth: 275 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <h2>Filters</h2>
-          <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Student" />
-            <FormControlLabel control={<Checkbox />} label="Sustainable" />
-          </FormGroup>
+      </Box>
+      <Box sx={{ display: 'flex', paddingLeft:'1vh'}}>
+        <FormGroup>
+          <FormControlLabel control={<Checkbox />} label="Student" />
+          <FormControlLabel control={<Checkbox />} label="Sustainable" />
+        </FormGroup>
+        </Box>
         </Card>
           
         </Stack>
