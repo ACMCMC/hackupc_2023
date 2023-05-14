@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Box, Collapse, List, Stack, TextField, Typography, easing } from "@mui/material";
+import { Box, Card, Checkbox, Collapse, FormControlLabel, FormGroup, List, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 var chipKey = 0;
 
@@ -103,7 +104,22 @@ export const SearchPage = () => {
         onKeyDown={handleKeyDown}
       />
       <ChipArray chips={chipData} handleDelete={handleDelete}></ChipArray>
-      <Stack direction="column" spacing={4}>
+      <Stack direction="row" spacing={4}>
+        <Stack direction="column">
+        <Card sx={{ minWidth: 275 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <h2>Filters</h2>
+      </Box>
+      <Box sx={{ display: 'flex', paddingLeft:'1vh'}}>
+        <FormGroup>
+          <FormControlLabel control={<Checkbox />} label="Student" />
+          <FormControlLabel control={<Checkbox />} label="Sustainable" />
+        </FormGroup>
+        </Box>
+        </Card>
+          
+        </Stack>
+      
         <TransitionGroup>
           {houses.map((house) =>
             <Collapse key={house.id}>
