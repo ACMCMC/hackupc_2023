@@ -26,6 +26,30 @@ type Cache struct {
 	Result string `json:"result"`
 }
 
+type Config struct {
+    DBUsername string
+    DBPassword string
+    DBHost     string
+    DBPort     string
+    DBName     string
+}
+
+func loadConfig() (*Config, error) {
+    config := Config{}
+    config.DBUsername = os.Getenv("DB_USERNAME")
+    config.DBPassword = os.Getenv("DB_PASSWORD")
+    config.DBHost = os.Getenv("DB_HOST")
+    config.DBPort = os.Getenv("DB_PORT")
+    config.DBName = os.Getenv("DB_NAME")
+
+    if config.DBUsername == "" || config.DBPassword == "" || config.DBHost == "" || config.DBPort == "" || config.DBName == "" {
+        return nil, errors.New("missing environment variable(s)")
+    }
+
+    return &config, nil
+}
+
+
 
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin","*")
@@ -213,13 +237,17 @@ func getReview(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func insertData(resource string, query string, result string) error {
-    // Set up the database connection
-    db, err := sql.Open("postgres", "postgres://ksbeiabwhtohbm:9f42d411affdaf0159e4361308518d5b1cdce7cd1178ce7c8f1c9022725c253f@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com/d5s4cc0i9uhpqe")
+	config, err := loadConfig()
     if err != nil {
-		log.Fatal(err)
-        return err
+        log.Fatalf("error loading configuration: %v", err)
+    }
+
+    db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.DBHost, config.DBPort, config.DBUsername, config.DBPassword, config.DBName))
+    if err != nil {
+        log.Fatalf("error connecting to database: %v", err)
     }
     defer db.Close()
+    
 	fmt.Printf("Connected to database")
     // Prepare the SQL statement for insertion
     stmt, err := db.Prepare("INSERT INTO public.\"Cache_DB\" (resource, query, result) VALUES ($1, $2, $3)")
@@ -245,11 +273,16 @@ type Data struct {
 }
 
 func getData(resource, query string) ([]Data, error) {
-    // Set up the database connection
-    db, err := sql.Open("postgres", "postgres://ksbeiabwhtohbm:9f42d411affdaf0159e4361308518d5b1cdce7cd1178ce7c8f1c9022725c253f@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com/d5s4cc0i9uhpqe")
+	config, err := loadConfig()
     if err != nil {
-        return nil, err
+        log.Fatalf("error loading configuration: %v", err)
     }
+
+    db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.DBHost, config.DBPort, config.DBUsername, config.DBPassword, config.DBName))
+    if err != nil {
+        log.Fatalf("error connecting to database: %v", err)
+    }
+
     defer db.Close()
 
     // Prepare the SQL statement for selecting data with the specified resource and query values
