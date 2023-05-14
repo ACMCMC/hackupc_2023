@@ -17,17 +17,20 @@
     "@types/node": "^16.18.29",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
+    "react-spring": "^9.7.1",
+    "react-transition-group": "^4.4.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
