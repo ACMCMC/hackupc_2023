@@ -17,3 +17,4 @@ jobs:
         failOnNonInclusiveTerm: false
         # Only scan files added or modified in last commit when checkout step has "with: fetch-depth: 2" configured
         excludeUnchangedFiles: false
+        excludeFiles: package.json,package-lock.json
