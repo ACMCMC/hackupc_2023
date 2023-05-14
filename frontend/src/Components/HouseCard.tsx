@@ -8,7 +8,7 @@
 
 import React from "react";
 import { House } from "../models/House";
-import { Box, Card, Rating } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Fade, Grow, LinearProgress, Rating, Stack, Typography } from '@mui/material';
 import ScoreIcon from '@mui/icons-material/Speed';
 import StarIcon from '@mui/icons-material/Star';
 import { alpha } from '@mui/material/styles';
@@ -19,29 +19,38 @@ interface Props {
 }
 
 const labels: { [index: string]: string } = {
-  0.5: 'Useless',
-  1: 'Useless+',
-  1.5: 'Poor',
-  2: 'Poor+',
-  2.5: 'Ok',
-  3: 'Ok+',
-  3.5: 'Good',
-  4: 'Good+',
-  4.5: 'Excellent',
-  5: 'Excellent+',
+    0.5: 'Useless',
+    1: 'Useless+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Ok',
+    3: 'Ok+',
+    3.5: 'Good',
+    4: 'Good+',
+    4.5: 'Excellent',
+    5: 'Excellent+',
 };
 
 function getLabelText(value: number) {
-  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+    return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
 export const HouseCard: React.FC<Props> = ({ house }) => {
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
+    const [generatedDescription, setGeneratedDescription] = React.useState<string | null>(null);
+    const [generatingDescription, setGeneratingDescription] = React.useState<boolean>(false);
 
     const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
 
     //console.log(elevation);
+
+    const generateDescription = () => {
+        setGeneratingDescription(true);
+        setTimeout(() => {
+            setGeneratedDescription("This is a nice house.");
+        }, 2000);
+    };
 
     return (
         <Card
@@ -51,77 +60,87 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 alignItems: 'center',
                 bgcolor: 'background.paper',
                 overflow: 'hidden',
-                borderRadius: '12px',
                 fontWeight: 'bold',
             }}
             variant="outlined"
-            onMouseEnter={() => set({ elevation: 1 })}
+            onMouseEnter={() => generateDescription()}
             onMouseLeave={() => set({ elevation: 0 })}
         >
 
-            <Box
-                component="img"
+            <CardMedia
+                src={'https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/261286__000.jpg'}
+                title="Image of the house"
                 sx={{
                     height: 233,
-                    maxHeight: { xs: 233, md: 167 },
-                    maxWidth: { xs: 350, md: 250 },
-                    objectFit: 'cover',
                 }}
-                alt="The house from the offer."
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
             />
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: { xs: 'center', md: 'flex-start' },
-                    m: 3,
-                    minWidth: { md: 350 },
-                }}
-            >
-                <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                    #{house.id} | {house.address}
-                </Box>
-                <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
-                    € {house.price}
-                </Box>
+            <CardContent>
                 <Box
                     sx={{
-                        mt: 1.5,
-                        p: 0.5,
-                        backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.1),
-                        borderRadius: '5px',
-                        color: (theme) => alpha(theme.palette.primary.main, 1),
-                        fontWeight: 'medium',
                         display: 'flex',
-                        fontSize: 12,
-                        alignItems: 'center',
-                        '& svg': {
-                            fontSize: 21,
-                            mr: 0.5,
-                        },
+                        flexDirection: 'column',
+                        alignItems: { xs: 'center', md: 'flex-start' },
+                        //m: 3,
+                        minWidth: { md: 350 },
                     }}
                 >
-                    <ScoreIcon />
-                    MATCH SCORE: 80%
-                    <Rating
-                        name="hover-feedback"
-                        value={value}
-                        precision={0.5}
-                        getLabelText={getLabelText}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
+                    <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
+                        {house.address}
+                    </Box>
+                    <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
+                        {house.name}
+                    </Box>
+                    <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
+                        € {house.price}
+                    </Box>
+                    <Box
+                        sx={{
+                            mt: 1.5,
+                            p: 0.5,
+                            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                            borderRadius: '5px',
+                            color: (theme) => alpha(theme.palette.primary.main, 1),
+                            fontWeight: 'medium',
+                            display: 'flex',
+                            fontSize: 12,
+                            alignItems: 'center',
+                            '& svg': {
+                                fontSize: 21,
+                                mr: 0.5,
+                            },
                         }}
-                        onChangeActive={(event, newHover) => {
-                            setHover(newHover);
-                        }}
-                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                    />
-                    {value !== null && (
-                        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-                    )}
+                    >
+                        <ScoreIcon />
+                        MATCH SCORE: 80%
+                    </Box>
+                    <Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
+                        <Rating
+                            name="hover-feedback"
+                            value={value}
+                            precision={0.5}
+                            getLabelText={getLabelText}
+                            onChange={(event, newValue) => {
+                                setValue(newValue);
+                            }}
+                            onChangeActive={(event, newHover) => {
+                                setHover(newHover);
+                            }}
+                            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                        />
+                        {value !== null && (
+                            <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+                        )}
+                    </Stack>
+                    <Fade in={generatingDescription}>
+                    <Box sx={{ width: '100%' }} marginTop={4} hidden={generatedDescription !== null || !generatingDescription}>
+                        <LinearProgress />
+                    </Box>
+                    </Fade>
+                    <Fade in={generatedDescription !== null}>
+                        <Typography component={'p'} marginTop={2} color={(theme) => theme.palette.grey[700]}>{generatedDescription}</Typography>
+                    </Fade>
                 </Box>
-            </Box>
+            </CardContent>
         </Card>
     );
 };
