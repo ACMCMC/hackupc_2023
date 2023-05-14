@@ -205,14 +205,33 @@ func init() {
 	}
 }
 
+func esHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		query := r.URL.Query()
+
+		term:= query.Get("term")
+
+		amt,err := strconv.Atoi(query.Get("amt"))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		src.EsSearch(term, amt)
+	default:
+		fmt.Fprintf(w, "Not available")
+	}
+}
+
 
 func main() {
 	// (int) port gets converted to a string
 	port := strconv.Itoa(PORT)
 
 	http.HandleFunc("/",root)
-	http.HandleFunc("/getHouses", getHouses)
+	http.HandleFunc("/getAppliances", getHouses)
 	http.HandleFunc("/getCompletion", getCompletion)
+	http.HandleFunc("/getEs", esHandler)
 	
 	fmt.Printf("Server running on http://localhost:%s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port,nil))
