@@ -17,7 +17,9 @@ export const getHouses = async (searchTerms: string[], forStudents: boolean, sus
 export const getCompletion = async (text: string) => {
     //return 'do';
     const response = await api.get('/getCompletion', { params: { text: text } });
-    return response.data;
+    // Only keep the text after the last 'Answer: '
+    const answer = response.data[0]['generated_text'].split('Answer: ').pop();
+    return answer;
 }
 
 export const getReview = async (text: string) => {
