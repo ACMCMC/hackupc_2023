@@ -6,25 +6,13 @@ import { House } from "../models/House";
 import { Box, Card, Checkbox, Collapse, FormControl, FormControlLabel, FormGroup, FormHelperText, Grid, InputLabel, List, MenuItem, Select, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
-import { getCompletion, getHouses } from "../api/api";
+import { getAppliances, getCompletion, getHouses } from "../api/api";
 import { alignProperty } from "@mui/material/styles/cssUtils";
 
 var chipKey = 0;
 
-const fakeHouse: House = {
-  id: 0,
-  name: 'Fake House',
-  address: '123 Fake Street',
-  price: 1000,
-  description: 'This is a fake house',
-  /*score: 1000,
-  student: false,
-  sustainable: false,*/
-  image: 'abc',
-}
-
 export const SearchPage = () => {
-  const [houses, setHouses] = useState<House[]>([fakeHouse]);
+  const [houses, setHouses] = useState<House[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [chipData, setChipData] = React.useState<ChipData[]>([]);
   const [sorting, setSorting] = useState<string>("1");
@@ -86,9 +74,21 @@ export const SearchPage = () => {
     if (!allChipsCompleted || chipData.length === 0)
       return;
 
+    getHouses(['oven'], false, false, 'score').then((response) => {
+      setHouses(response);
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    return;
+
     var labels = chipData.map((chip) => chip.label);
-    getHouses(labels, false, false, 'score').then((response) => {
-      setHouses([fakeHouse]);
+    getAppliances(labels, false, false, 'score').then((response) => {
+      getHouses(labels, false, false, 'score').then((response) => {
+        setHouses(response);
+      }).catch((error) => {
+        console.log(error);
+      });
       //setHouses(response);
     }).catch((error) => {
       console.log(error);
