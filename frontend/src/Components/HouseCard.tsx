@@ -8,7 +8,7 @@
 
 import React from "react";
 import { House } from "../models/House";
-import { Box, Card, CardContent, CardMedia, Fade, Grow, Rating, Stack, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Fade, Grow, LinearProgress, Rating, Stack, Typography } from '@mui/material';
 import ScoreIcon from '@mui/icons-material/Speed';
 import StarIcon from '@mui/icons-material/Star';
 import { alpha } from '@mui/material/styles';
@@ -39,17 +39,18 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
     const [value, setValue] = React.useState<number | null>(2);
     const [hover, setHover] = React.useState(-1);
     const [generatedDescription, setGeneratedDescription] = React.useState<string | null>(null);
-
-    // After 2 seconds, generate a description for the house
-    React.useEffect(() => {
-        setTimeout(() => {
-            setGeneratedDescription("This is a nice house.");
-        }, 2000);
-    }, []);
+    const [generatingDescription, setGeneratingDescription] = React.useState<boolean>(false);
 
     const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
 
     //console.log(elevation);
+
+    const generateDescription = () => {
+        setGeneratingDescription(true);
+        setTimeout(() => {
+            setGeneratedDescription("This is a nice house.");
+        }, 2000);
+    };
 
     return (
         <Card
@@ -62,12 +63,12 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 fontWeight: 'bold',
             }}
             variant="outlined"
-            onMouseEnter={() => set({ elevation: 1 })}
+            onMouseEnter={() => generateDescription()}
             onMouseLeave={() => set({ elevation: 0 })}
         >
 
             <CardMedia
-                src={'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2'}
+                src={'https://restb-hackathon.s3.amazonaws.com/real_estate_dataset/images/261286__000.jpg'}
                 title="Image of the house"
                 sx={{
                     height: 233,
@@ -79,7 +80,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: { xs: 'center', md: 'flex-start' },
-                        m: 3,
+                        //m: 3,
                         minWidth: { md: 350 },
                     }}
                 >
@@ -130,8 +131,13 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                         )}
                     </Stack>
+                    <Fade in={generatingDescription}>
+                    <Box sx={{ width: '100%' }} marginTop={4} hidden={generatedDescription !== null || !generatingDescription}>
+                        <LinearProgress />
+                    </Box>
+                    </Fade>
                     <Fade in={generatedDescription !== null}>
-                        <Typography component={'p'}>{generatedDescription}</Typography>
+                        <Typography component={'p'} marginTop={2} color={(theme) => theme.palette.grey[700]}>{generatedDescription}</Typography>
                     </Fade>
                 </Box>
             </CardContent>
