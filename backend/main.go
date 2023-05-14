@@ -45,15 +45,10 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	switch r.Method {
 	case "GET":
-		query := r.URL.Query()
-
-		text := query.Get("text")
-		
-		CompleteData = getData("getHouses", text)
+		CompleteData = getData("getHouses", r.URL.Query())
 		if len(CompleteData) > 0 {
 			fmt.Printf("Data found in cache")
-			fmt.Printf(CompleteData)
-			return completeddata
+			return completeddata 
 		}
 		fmt.Printf("Data not found in cache")
 
@@ -111,6 +106,8 @@ func getCompletion(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	switch r.Method {
 	case "GET":
+		
+
 		query := r.URL.Query()
 
 		text := query.Get("text")
@@ -118,7 +115,6 @@ func getCompletion(w http.ResponseWriter, r *http.Request) {
 		CompleteData = getData("getCompletion", text)
 		if len(CompleteData) > 0 {
 			fmt.Printf("Data found in cache")
-			fmt.Printf(CompleteData)
 			return CompleteData
 		}
 		fmt.Printf("Data not found in cache")
@@ -312,9 +308,8 @@ func esHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// (int) port gets converted to a string
-	//getData("testingresource123","testingquery")
-	//insertData("testingresource","testingquery","testingresult")
-	getCompletion("testingresource","testingquery")
+	getData("testingresource123","testingquery")
+	insertData("testingresource","testingquery","testingresult")
 	port := strconv.Itoa(PORT)
 	http.HandleFunc("/",root)
 	http.HandleFunc("/getAppliances", getHouses)
