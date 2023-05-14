@@ -12,6 +12,8 @@ import (
 	"github.com/joho/godotenv"
 	// "elastic/go-elasticsearch"
 	"github.com/AOrps/hackupc_2023/backend/src"
+	"database/sql"
+    _ "github.com/lib/pq"
 )
 
 const (
@@ -43,6 +45,13 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	switch r.Method {
 	case "GET":
+		CompleteData = getData("getHouses", r.URL.Query())
+		if len(CompleteData) > 0 {
+			fmt.Printf("Data found in cache")
+			return completeddata 
+		}
+		fmt.Printf("Data not found in cache")
+
 		fmt.Fprintf(w,"Asking the question: <code>Which of the following appliances are used to [prompt]? [Enter List Here]</code>")
 
 
@@ -95,19 +104,26 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 
 func getCompletion(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
-	
 	switch r.Method {
 	case "GET":
+		
+
 		query := r.URL.Query()
 
 		text := query.Get("text")
 
+		CompleteData = getData("getCompletion", text)
+		if len(CompleteData) > 0 {
+			fmt.Printf("Data found in cache")
+			return CompleteData
+		}
+		fmt.Printf("Data not found in cache")
 
 		complPrompt := `Prompt:
 
 For each noun, write the corresponding verb.
 ## Example 1: book
-Anwser: read
+Answer: read
 ## Example 2: coffee
 Answer: brew
 ## Example 3: movie
@@ -148,6 +164,72 @@ Answer: watch
 }
 
 
+func insertData(resource string, query string, result string) error {
+    // Set up the database connection
+    db, err := sql.Open("postgres", "postgres://ksbeiabwhtohbm:9f42d411affdaf0159e4361308518d5b1cdce7cd1178ce7c8f1c9022725c253f@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com/d5s4cc0i9uhpqe")
+    if err != nil {
+		log.Fatal(err)
+        return err
+    }
+    defer db.Close()
+	fmt.Printf("Connected to database")
+    // Prepare the SQL statement for insertion
+    stmt, err := db.Prepare("INSERT INTO public.\"Cache_DB\" (resource, query, result) VALUES ($1, $2, $3)")
+    if err != nil {
+        return err
+    }
+    defer stmt.Close()
+	fmt.Printf("Prepared statement")
+    // Execute the SQL statement with the provided data
+    _, err = stmt.Exec(resource, query, result)
+    if err != nil {
+		log.Fatal(err)
+        return err
+    }
+	fmt.Printf("Inserted data")
+    return nil
+}
+
+type Data struct {
+	Resource string
+	Query string
+	Result string
+}
+
+func getData(resource, query string) ([]Data, error) {
+    // Set up the database connection
+    db, err := sql.Open("postgres", "postgres://ksbeiabwhtohbm:9f42d411affdaf0159e4361308518d5b1cdce7cd1178ce7c8f1c9022725c253f@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com/d5s4cc0i9uhpqe")
+    if err != nil {
+        return nil, err
+    }
+    defer db.Close()
+
+    // Prepare the SQL statement for selecting data with the specified resource and query values
+    rows, err := db.Query("SELECT resource, query, result FROM public.\"Cache_DB\" WHERE resource = $1 AND query = $2", resource, query)
+    if err != nil {
+        return nil, err
+    }
+    defer rows.Close()
+
+    // Iterate through the rows and store the data in a slice
+    var data []Data
+    for rows.Next() {
+        var resource string
+        var query string
+        var result string
+        err := rows.Scan(&resource, &query, &result)
+        if err != nil {
+            return nil, err
+        }
+        data = append(data, Data{Resource: resource, Query: query, Result: result})
+    }
+    err = rows.Err()
+    if err != nil {
+        return nil, err
+    }
+
+    return data, nil
+}
 
 func init() {
 	// err handling when trying to get
@@ -160,6 +242,8 @@ func init() {
 
 func main() {
 	// (int) port gets converted to a string
+	getData("testingresource123","testingquery")
+	insertData("testingresource","testingquery","testingresult")
 	port := strconv.Itoa(PORT)
 	http.HandleFunc("/",root)
 	http.HandleFunc("/getHouses", getHouses)
