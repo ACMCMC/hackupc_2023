@@ -69,12 +69,12 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	switch r.Method {
 	case "GET":
-		CompleteData = getData("getHouses", r.URL.Query())
-		if len(CompleteData) > 0 {
-			fmt.Printf("Data found in cache")
-			return completeddata 
-		}
-		fmt.Printf("Data not found in cache")
+		// CompleteData = getData("getHouses", r.URL.Query())
+		// if len(CompleteData) > 0 {
+		// 	fmt.Printf("Data found in cache")
+		// 	return completeddata 
+		// }
+		// fmt.Printf("Data not found in cache")
 
 		fmt.Fprintf(w,"Asking the question: <code>Which of the following appliances are used to [prompt]? [Enter List Here]</code>")
 
@@ -136,12 +136,12 @@ func getCompletion(w http.ResponseWriter, r *http.Request) {
 
 		text := query.Get("text")
 
-		CompleteData = getData("getCompletion", text)
-		if len(CompleteData) > 0 {
-			fmt.Printf("Data found in cache")
-			return CompleteData
-		}
-		fmt.Printf("Data not found in cache")
+		// CompleteData = getData("getCompletion", text)
+		// if len(CompleteData) > 0 {
+		// 	fmt.Printf("Data found in cache")
+		// 	return CompleteData
+		// }
+		// fmt.Printf("Data not found in cache")
 
 		complPrompt := `For each noun, write the corresponding verb.
 ## Example 1: book
@@ -239,10 +239,11 @@ func getReview(w http.ResponseWriter, r *http.Request) {
 func insertData(resource string, query string, result string) error {
 	config, err := loadConfig()
     if err != nil {
+		fmt.Printf("Load Fail")
         log.Fatalf("error loading configuration: %v", err)
     }
 
-    db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.DBHost, config.DBPort, config.DBUsername, config.DBPassword, config.DBName))
+    db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s ", config.DBHost, config.DBPort, config.DBUsername, config.DBPassword, config.DBName))
     if err != nil {
         log.Fatalf("error connecting to database: %v", err)
     }
@@ -341,8 +342,8 @@ func esHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// (int) port gets converted to a string
-	getData("testingresource123","testingquery")
-	insertData("testingresource","testingquery","testingresult")
+	//getData("testingresource123","testingquery")
+	insertData("testingresource2","testingquery2","testingresult2")
 	port := strconv.Itoa(PORT)
 	http.HandleFunc("/",root)
 	http.HandleFunc("/getAppliances", getHouses)
