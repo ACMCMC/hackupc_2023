@@ -171,6 +171,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                         <Typography component={'p'} marginTop={2} color={(theme) => theme.palette.grey[700]}>{generatedDescription}</Typography>
                     </Fade>
                 </Box>
+                
             </CardContent>
         </Card>
     );
