@@ -5,7 +5,7 @@ import { FAKE_DATA } from './fake_data';
 import { House } from '../models/House';
 
 // Load the local JSON file 'top-10k.json' into memory
-const TENK_FAKE_DATA = require('./top-10k.json');
+//const TENK_FAKE_DATA = require('./top-10k.json');
 
 const api = axios.create({
     baseURL: 'https://api.mikasa.tech',
@@ -39,8 +39,9 @@ export const getReview = async (house: House) => {
 
 const turn_es_doc_into_house = (doc: any) => {
     var rooms_and_appliances: Map<string, string[]> = new Map();
+    console.log(doc);
     for (let [key, value] of Object.entries(doc['image_data']['features_by_room_type'])) {
-        if (value === undefined)
+        if (value === undefined || value === null)
             continue;
 
         var appliances: string[] = [];
@@ -65,10 +66,23 @@ const turn_es_doc_into_house = (doc: any) => {
 
 export const getHouses = async (searchTerms: string[], forStudents: boolean, sustainable: boolean, orderBy: string) => {
     try {
-        const response = await api.get('/getES', { params: { term: searchTerms[0] } });
-        return response.data['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
+        const list_of_houses = [];
+        while (list_of_houses.length < 10) {
+            const response = await api.get('/getES', { params: { term: searchTerms[0] } });
+            // In the response, replace 'None' with 'null'
+            console.log(response.data);
+            if ((response.data as string).charAt(0) === '{') {
+                const replacedResponse = response.data.replace(/None/g, 'null');
+                const processed = turn_es_doc_into_house(JSON.parse(replacedResponse));
+                list_of_houses.push(processed);
+            } else {
+                break;
+            }
+        }
+
+        return list_of_houses;
     } catch (e) {
         console.log(e);
-        return TENK_FAKE_DATA['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
+        return FAKE_DATA['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
     }
 };
