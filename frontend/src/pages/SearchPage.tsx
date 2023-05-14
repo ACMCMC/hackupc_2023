@@ -6,7 +6,7 @@ import { House } from "../models/House";
 import { Box, Card, Checkbox, Collapse, FormControl, FormControlLabel, FormGroup, FormHelperText, Grid, InputLabel, List, MenuItem, Select, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
-import { getCompletion, getHouses } from "../api/api";
+import { getCompletion, getAppliances, getHouses } from "../api/api";
 import { alignProperty } from "@mui/material/styles/cssUtils";
 
 var chipKey = 0;
@@ -21,6 +21,15 @@ const fakeHouse: House = {
   student: false,
   sustainable: false,*/
   image: 'abc',
+}
+
+const loadHouses = (searchTerms: string[], forStudents: boolean, sustainable: boolean, orderBy: string) => {
+  getHouses(searchTerms, forStudents, sustainable, orderBy).then((response) => {
+    console.log(response);
+  }).catch((error) => {
+    console.log(error);
+  });
+  return [];
 }
 
 export const SearchPage = () => {
@@ -87,8 +96,8 @@ export const SearchPage = () => {
       return;
 
     var labels = chipData.map((chip) => chip.label);
-    getHouses(labels, false, false, 'score').then((response) => {
-      setHouses([fakeHouse]);
+    getAppliances(labels, false, false, 'score').then((response) => {
+      loadHouses(labels, false, false, 'score');
       //setHouses(response);
     }).catch((error) => {
       console.log(error);

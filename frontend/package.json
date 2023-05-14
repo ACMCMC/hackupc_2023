@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
+    "@elastic/elasticsearch": "^8.7.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^4.5.8",
@@ -17,7 +18,11 @@
     "@types/node": "^16.18.29",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "async_hooks": "1.0.0",
     "axios": "^1.4.0",
+    "browserify-zlib": "0.2.0",
+    "console-browserify": "1.2.0",
+    "node-polyfill-webpack-plugin": "2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
@@ -25,12 +30,13 @@
     "react-spring": "^9.7.1",
     "react-transition-group": "^4.4.5",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "5.82.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --passWithNoTests",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,5 +56,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "assert": "2.0.0",
+    "buffer": "6.0.3",
+    "crypto-browserify": "3.12.0",
+    "https-browserify": "1.0.0",
+    "os-browserify": "0.3.0",
+    "process": "0.11.10",
+    "react-app-rewired": "2.2.1",
+    "stream-browserify": "3.0.0",
+    "stream-http": "3.2.0",
+    "url": "0.11.0"
   }
 }
