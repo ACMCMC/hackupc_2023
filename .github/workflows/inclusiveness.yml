@@ -1,0 +1,19 @@
+name: Inclusiveness check
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  inclusiveness:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Inclusiveness Analyzer
+      uses: microsoft/InclusivenessAnalyzer@v1.0.1
+      with:
+        # Fails the step if a non-inclusive term is found
+        failOnNonInclusiveTerm: true
+        # Only scan files added or modified in last commit when checkout step has "with: fetch-depth: 2" configured
+        excludeUnchangedFiles: true
