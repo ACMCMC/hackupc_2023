@@ -130,7 +130,7 @@ export default function PersistentDrawerLeft() {
             { text: 'Home', link: '', icon: <HomeIcon /> },
             { text: 'Search', link: '/search', icon: <SearchIcon /> },
             { text: 'My Profile', link: '/profile', icon: <AccountCircleIcon /> },
-            { text: 'About Us', link: '/about', icon: <InfoIcon /> },
+            { text: 'About Us', link: '/aboutus', icon: <InfoIcon /> },
           ].map((item) => (
             <ListItem key={item.text} disablePadding>
               <ListItemButton component={Link} to={item.link}>
