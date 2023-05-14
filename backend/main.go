@@ -17,6 +17,7 @@ const (
 )
 
 func root(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	switch r.Method {
 	case "GET":
 		fmt.Fprintf(w,"Hello World on /")
@@ -29,7 +30,12 @@ func root(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World on /")
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin","*")
+}
+
 func getHouses(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	switch r.Method {
 	case "GET":
 		fmt.Fprintf(w,"Asking the question: <code>Which of the following appliances are used to [prompt]? [Enter List Here]</code>")
