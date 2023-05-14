@@ -146,7 +146,7 @@ Answer: watch
 }
 
 
-func getHouseHumanDescription(w http.ResponseWriter, r *http.Request) {
+func getReview(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	
 	switch r.Method {
