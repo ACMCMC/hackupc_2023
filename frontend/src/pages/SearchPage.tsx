@@ -115,7 +115,7 @@ export const SearchPage = () => {
       />
       <ChipArray chips={chipData} handleDelete={handleDelete}></ChipArray>
       <Grid container spacing={{ md: 2 }}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={4} paddingBottom={4}>
           <Card sx={{ width: { xs: '100%', md: 275 } }}
             variant="outlined"
           >
