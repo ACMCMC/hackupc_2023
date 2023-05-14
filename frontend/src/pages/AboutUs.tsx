@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Button, Stack, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import LoginButton from "../Components/LoginButton";
 import LogoutButton from "../Components/LogoutButton";
-import LandingPhoto from '../static/images/AboutUs.jpg';
+import AboutPhoto from '../static/images/AboutUs.jpg';
 
 const AboutUs = () => {
   var { user, isAuthenticated, isLoading, logout } = useAuth0();
@@ -33,7 +33,7 @@ const AboutUs = () => {
         >
           <Box
             sx={{
-              backgroundImage: `url(${LandingPhoto})`,
+              backgroundImage: `url(${AboutPhoto})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
