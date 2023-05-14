@@ -118,9 +118,6 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                     <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
                         {house.address}
                     </Box>
-                    <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                        {house.name}
-                    </Box>
                     <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
                         € {house.price}
                     </Box>

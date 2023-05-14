@@ -28,28 +28,32 @@ export const getCompletion = async (text: string) => {
 }
 
 export const getReview = async (house: House) => {
-    // First, build a representation of the house
-    var representation = JSON.stringify(house.rooms_and_appliances);
-    // Build a representation of the houses rooms and appliances.
-    console.log(house)
-    console.log(JSON.stringify(house['rooms_and_appliances']))
+    try {
+        // First, build a representation of the house
+        var representation = JSON.stringify(house.rooms_and_appliances);
+        // Build a representation of the houses rooms and appliances.
+        console.log(house)
+        console.log(JSON.stringify(house['rooms_and_appliances']))
 
-    representation += "{\n";
-    house.rooms_and_appliances.forEach((value, key) => {
+        representation += "{\n";
+        house.rooms_and_appliances.forEach((value, key) => {
 
-        representation += `"${key}": [`;
-        for (const appliance of value) {
-            representation += `"${appliance}", `;
-        }
-        //representation = representation.slice(0, -2);
-        representation += "],\n";
-    });
+            representation += `"${key}": [`;
+            for (const appliance of value) {
+                representation += `"${appliance}", `;
+            }
+            //representation = representation.slice(0, -2);
+            representation += "],\n";
+        });
 
-    representation += "}";
-    console.log(representation);
+        representation += "}";
+        console.log(representation);
 
-    const response = await api.post('/getReview', { params: { params: representation}});
-    return response.data;
+        const response = await api.post('/getReview', { params: { params: representation } });
+        return response.data;
+    } catch (e) {
+        return "A lovely home!";
+    }
 }
 
 const turn_es_doc_into_house = (doc: any) => {
@@ -69,10 +73,10 @@ const turn_es_doc_into_house = (doc: any) => {
     const house: House = {
         id: doc['id'],
         description: doc['description'],
-        address: 'abc',
+        address: 'Address',
         price: doc['price'],
         image: doc['images'].length > 0 ? doc['images'][0] : undefined,
-        name: 'rez',
+        name: 'Name',
         rooms_and_appliances: rooms_and_appliances,
     };
     return house;
