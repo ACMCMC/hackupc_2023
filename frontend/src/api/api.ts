@@ -28,12 +28,27 @@ export const getCompletion = async (text: string) => {
 }
 
 export const getReview = async (house: House) => {
-    //return 'do';
-
     // First, build a representation of the house
-    const representation = JSON.stringify(house.rooms_and_appliances);
+    var representation = JSON.stringify(house.rooms_and_appliances);
+    // Build a representation of the houses rooms and appliances.
+    console.log(house)
+    console.log(JSON.stringify(house['rooms_and_appliances']))
 
-    const response = await api.get('/getReview', { params: { params: representation } });
+    representation += "{\n";
+    house.rooms_and_appliances.forEach((value, key) => {
+
+        representation += `"${key}": [`;
+        for (const appliance of value) {
+            representation += `"${appliance}", `;
+        }
+        //representation = representation.slice(0, -2);
+        representation += "],\n";
+    });
+
+    representation += "}";
+    console.log(representation);
+
+    const response = await api.post('/getReview', { params: { params: representation}});
     return response.data;
 }
 
