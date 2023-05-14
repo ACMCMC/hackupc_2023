@@ -20,7 +20,7 @@ interface Props {
 export const HouseCard: React.FC<Props> = ({ house }) => {
     const [{ elevation }, set] = useSpring(() => ({ elevation: 0 }));
 
-    console.log(elevation);
+    //console.log(elevation);
 
     return (
         <Card
@@ -42,9 +42,9 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 component="img"
                 sx={{
                     height: 233,
-                    width: 350,
                     maxHeight: { xs: 233, md: 167 },
                     maxWidth: { xs: 350, md: 250 },
+                    objectFit: 'cover',
                 }}
                 alt="The house from the offer."
                 src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
@@ -59,7 +59,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 }}
             >
                 <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                    {house.id} | {house.address}
+                    #{house.id} | {house.address}
                 </Box>
                 <Box component="span" sx={{ color: theme => theme.palette.secondary.main, fontSize: 22 }}>
                     € {house.price}
