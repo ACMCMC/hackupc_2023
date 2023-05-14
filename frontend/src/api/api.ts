@@ -4,6 +4,9 @@ import axios from 'axios';
 import { FAKE_DATA } from './fake_data';
 import { House } from '../models/House';
 
+// Load the local JSON file 'top-10k.json' into memory
+const TENK_FAKE_DATA = require('./top-10k.json');
+
 const api = axios.create({
     baseURL: 'https://api.mikasa.tech',
     headers: {
@@ -61,10 +64,11 @@ const turn_es_doc_into_house = (doc: any) => {
 
 
 export const getHouses = async (searchTerms: string[], forStudents: boolean, sustainable: boolean, orderBy: string) => {
-    if (searchTerms.length === 0) {
-        return FAKE_DATA['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
+    try {
+        const response = await api.get('/getES', { params: { term: searchTerms[0] } });
+        return response.data['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
+    } catch (e) {
+        console.log(e);
+        return TENK_FAKE_DATA['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
     }
-
-    const response = await api.get('/getES', { params: { term: searchTerms[0] } });
-    return response.data['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
 };
