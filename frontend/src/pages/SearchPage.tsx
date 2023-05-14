@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { HouseCard } from "../Components/HouseCard";
 import { House } from "../models/House";
-import { Box, Card, Checkbox, Collapse, FormControl, FormControlLabel, FormGroup, FormHelperText, Grid, InputLabel, List, MenuItem, Select, Stack, TextField, Typography, easing } from "@mui/material";
+import { Box, Card, Checkbox, Collapse, Container, FormControl, FormControlLabel, FormGroup, FormHelperText, Grid, InputLabel, List, MenuItem, Select, Stack, TextField, Typography, easing } from "@mui/material";
 import ChipArray, { ChipData } from "../Components/ChipArray";
 import { TransitionGroup } from 'react-transition-group';
 import { getAppliances, getCompletion, getHouses } from "../api/api";
@@ -108,7 +108,7 @@ export const SearchPage = () => {
         fullWidth
         variant="outlined"
         type="text"
-        placeholder="Netflix, pizza, books..."
+        placeholder="What things do you like? Netflix, pizza, books..."
         value={searchTerm}
         onChange={handleTextFieldChange}
         onKeyDown={handleKeyDown}
@@ -155,13 +155,15 @@ export const SearchPage = () => {
             <TransitionGroup>
               {houses.map((house) =>
                 <Collapse key={house.id}>
-                  <Box
-                    sx={{
-                      marginBottom: 4,
-                    }}
-                  >
-                    <HouseCard house={house} />
-                  </Box>
+                  <Container maxWidth={false}>
+                    <Box
+                      sx={{
+                        marginBottom: 4,
+                      }}
+                    >
+                      <HouseCard house={house} />
+                    </Box>
+                  </Container>
                 </Collapse>
               )}
             </TransitionGroup>

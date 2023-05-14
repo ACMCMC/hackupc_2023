@@ -13,6 +13,7 @@ import ScoreIcon from '@mui/icons-material/Speed';
 import StarIcon from '@mui/icons-material/Star';
 import { alpha } from '@mui/material/styles';
 import { useSpring, animated } from "react-spring";
+import { getReview } from "../api/api";
 
 interface Props {
     house: House;
@@ -47,9 +48,12 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
 
     const generateDescription = () => {
         setGeneratingDescription(true);
-        setTimeout(() => {
-            setGeneratedDescription("This is a nice house.");
-        }, 2000);
+
+        getReview(house).then((response) => {
+            setGeneratedDescription(response);
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
     return (
@@ -73,6 +77,7 @@ export const HouseCard: React.FC<Props> = ({ house }) => {
                 sx={{
                     height: 233,
                 }}
+                component="img"
             />
             <CardContent>
                 <Box

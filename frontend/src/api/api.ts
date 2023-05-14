@@ -28,15 +28,16 @@ export const getReview = async (house: House) => {
     //return 'do';
 
     // First, build a representation of the house
+    const representation = JSON.stringify(house.rooms_and_appliances);
 
-    const response = await api.get('/getReview', { params: { params: house.rooms_and_appliances } });
+    const response = await api.get('/getReview', { params: { params: representation } });
     return response.data;
 }
 
 const turn_es_doc_into_house = (doc: any) => {
     var rooms_and_appliances: Map<string, string[]> = new Map();
     for (let [key, value] of Object.entries(doc['image_data']['features_by_room_type'])) {
-        if (key === undefined)
+        if (value === undefined)
             continue;
 
         var appliances: string[] = [];
@@ -57,8 +58,13 @@ const turn_es_doc_into_house = (doc: any) => {
     };
     return house;
 };
-        
+
 
 export const getHouses = async (searchTerms: string[], forStudents: boolean, sustainable: boolean, orderBy: string) => {
-    return FAKE_DATA['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
+    if (searchTerms.length === 0) {
+        return FAKE_DATA['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
+    }
+
+    const response = await api.get('/getES', { params: { term: searchTerms[0] } });
+    return response.data['hits']['hits'].map((doc: any) => turn_es_doc_into_house(doc['_source']));
 };
