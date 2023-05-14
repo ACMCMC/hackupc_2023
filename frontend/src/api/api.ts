@@ -73,7 +73,7 @@ const turn_es_doc_into_house = (doc: any) => {
     const house: House = {
         id: doc['id'],
         description: doc['description'],
-        address: 'Address',
+        address: doc['neighborhood'],
         price: doc['price'],
         image: doc['images'].length > 0 ? doc['images'][0] : undefined,
         name: 'Name',
