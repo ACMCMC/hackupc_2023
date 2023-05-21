@@ -1,0 +1,673 @@
+    1  ls
+    2  apt install nginx
+    3  sudo apt install nginx
+    4  ls
+    5  nginx
+    6  ls
+    7  sudo apt install golang-go
+    8  sudo apt install -y certbot python3-certbot-nginx
+    9  uname -a
+   10  sudo apt install -y certbot python3-certbot-nginx
+   11  sudo apt install -y python3-certbot-nginx
+   12  sudo snap install core; sudo snap refresh core
+   13  sudo apt remove certbot
+   14  sudo snap install --classic certbot
+   15  sudo ln -s /snap/bin/certbot /usr/bin/certbot
+   16  ls
+   17  pwd
+   18  ls
+   19  git clone https://github.com/AOrps/hackupc_2023.git
+   20  ls
+   21  ssh-keygen -t ed25519 -C "admin on mikasa.tech azure"
+   22  cat ~/.ssh/id_ed25519.pub 
+   23  git clone git@github.com:AOrps/hackupc_2023.git
+   24  ls
+   25  cd hackupc_2023/
+   26  ls
+   27  cd backend/
+   28  ls
+   29  sudo apt install Makefile
+   30  sudo apt install make
+   31  ls
+   32  az install
+   33  git pull -all
+   34  ls
+   35  cd hackupc_2023/
+   36  ls
+   37  git pull
+   38  ls
+   39  cd backend/
+   40  ls
+   41  git pull
+   42  ls
+   43  git remote
+   44  git remote -v
+   45  git pull
+   46  git pull --force
+   47  cd ../..
+   48  ls
+   49  rm -rf
+   50  git clone git@github.com:AOrps/hackupc_2023.git
+   51  ls 
+   52  rm -rf hackupc_2023/
+   53  git clone git@github.com:AOrps/hackupc_2023.git
+   54  cd hackupc_2023/
+   55  ls
+   56  cd backend/
+   57  ls
+   58  make
+   59  go get
+   60  make
+   61  git pull
+   62  make
+   63  cd ..
+   64  ls
+   65  cd ..
+   66  rm -rf hackupc_2023/
+   67  git clone git@github.com:AOrps/hackupc_2023.git
+   68  cd hackupc_2023/
+   69  ls
+   70  cd backend/
+   71  ls
+   72  make
+   73  sudo apt remove golang-go
+   74  rm -rf /usr/local/go
+   75  cd ../..
+   76  wget go.dev/dl/go1.20.4.linux-amd64.tar.gz
+   77  ls
+   78  cd go/
+   79  ls
+   80  cd ..
+   81  rm -rf go
+   82  ls
+   83  rm -rf go
+   84  sudo rm -rf go/
+   85  ls
+   86  tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz 
+   87  sudo tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz 
+   88  ls
+   89  go version
+   90  cat /etc/profile
+   91  nano /etc/profile
+   92  sudo nano /etc/profile
+   93  ls
+   94  source .
+   95  source .bashrc 
+   96  ls
+   97  go version
+   98  /usr/local/go/bin/go
+   99  nano $HOME/.profile
+  100  /usr/local/go/bin/go
+  101  go
+  102  source ~/.bashrc 
+  103  go
+  104  go version
+  105  tar -C /usr/local/ -xzf go1.20.4.linux-amd64.tar.gz 
+  106  rm -rf /usr/local/go && tar -C /usr/local/ -xzf go1.20.4.linux-amd64.tar.gz 
+  107  sudo rm -rf /usr/local/go && sudo tar -C /usr/local/ -xzf go1.20.4.linux-amd64.tar.gz 
+  108  go
+  109  sudo rm -rf /usr/local/go && sudo tar -C /usr/local/ -xzf go1.20.4.linux-amd64.tar.gz 
+  110  ls
+  111  cd hackupc_2023/
+  112  ls
+  113  cd backend/
+  114  ls
+  115  make
+  116  ls
+  117  cd ../..
+  118  rm -rf hackupc_2023/
+  119  git clone git@github.com:AOrps/hackupc_2023.git
+  120  cd hackupc_2023/backend/
+  121  make
+  122  cat src/verb.go 
+  123  git pull
+  124  make
+  125  ./main.o 
+  126  nano .env
+  127  ./main.o 
+  128  ls
+  129  cd ..
+  130  ls
+  131  cd backend/
+  132  ls
+  133  cd ../infra/
+  134  ls
+  135  cat goweb.service 
+  136  cp goweb.service /lib/systemd//system/
+  137  sudo cp goweb.service /lib/systemd//system/
+  138  sudo nano /lib/systemd/system/goweb.service 
+  139  sudo systemctl restart goweb
+  140  sudo systemctl status goweb
+  141  sudo systemctl start goweb
+  142  sudo systemctl status goweb
+  143  ls
+  144  cd ../backend/
+  145  ./main.o 
+  146  sudo nano /lib/systemd/system/goweb.service 
+  147  sudo systemctl status goweb
+  148  sudo systemctl restart goweb && sudo systemctl status goweb
+  149  useradd -s /bin/bash -G sudo -m notadmin
+  150  sudo useradd -s /bin/bash -G sudo -m notadmin
+  151  su notadmin
+  152  sudo passwd notadmin
+  153  su notadmin
+  154  ls
+  155  sudo systemctl restart goweb && sudo systemctl status goweb
+  156  sudo nano /lib/systemd/system/goweb.service 
+  157  sudo systemctl restart goweb && sudo systemctl status goweb
+  158  sudo systemctl daemon-reload
+  159  sudo systemctl restart goweb && sudo systemctl status goweb
+  160  systemctl status goweb
+  161  ./main.o
+  162  cd hackupc_2023/backend/
+  163  ./main.o 
+  164  cd ../infra/
+  165  ls
+  166  sudo cp nginx.conf /etc/nginx/sites-available/api.mikasa.tech
+  167  nano /etc/nginx/sites-available/api.mikasa.tech 
+  168  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  169  nginx
+  170  sudo nginx -t
+  171  sudo ln -s /etc/nginx/sites-available/api.mikasa.tech /etc/nginx/sites-enabled/api.mikasa.tech
+  172  nginx -s relaod
+  173  nginx -s reload
+  174  sudo nginx -s reload
+  175  sudo systemctl restart goweb && sudo systemctl status goweb
+  176  cd ../backend/
+  177  ls
+  178  make
+  179  ./main.o 
+  180  sudo nginx -s reload
+  181  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  182  sudo nginx -s reload
+  183  ./main.o 
+  184  sudo systemctl restart nginx
+  185  sudo systemctl status nginx
+  186  sudo systemctl restart goweb
+  187  sudo systemctl status goweb
+  188  ./main.o 
+  189  sudo ./main.o 
+  190  ping api.mikasa.tech
+  191  ping sub.mikasa.tech
+  192  ping mikasa.tech
+  193  sudo systemctl status goweb
+  194  journalctl -u goweb.service 
+  195  sudo nano /lib/systemd/system/goweb.service 
+  196  sudo systemctl status goweb
+  197  sudo systemctl reload-daeq
+  198  sudo systemctl status goweb
+  199  sudo systemctl daemon-reload
+  200  sudo systemctl status goweb
+  201  sudo systemctl restart goweb
+  202  sudo systemctl status goweb
+  203  systemctl nginx
+  204  systemctl statusnginx
+  205  systemctl status nginx
+  206  curl localhost:9991/
+  207  nginx -t
+  208  sudo nginx -t
+  209  nano /etc/nginx/sites-available/api.mikasa.tech 
+  210  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  211  sudo nginx -t
+  212  sudo nginx -s reload
+  213  sudo systemctl restart nginx
+  214  sudo systemctl status nginx
+  215  nginx -s reload
+  216  sudo nginx -s reload
+  217  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  218  ping api.mikasa.tech
+  219  ping sub.mikasa.tech
+  220  ping back.mikasa.tech
+  221  sudo ufw allow 'Nginx Full'
+  222  ls
+  223  cat main.go 
+  224  cat main.go | m
+  225  cat main.go | less
+  226  nano /etc/nginx/sites-available/api.mikasa.tech 
+  227  service nginx status
+  228  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  229  sudo nginx -s reload
+  230  sudo systemctl restart nginx
+  231  sudo systemctl stataus nginx 
+  232  sudo systemctl status nginx 
+  233  curl api.mikasa.tech
+  234  curl api.mikasa.tech -v
+  235  ufw status
+  236  sudo ufw status
+  237  sudo ufw enable
+  238  sudo ufw allow 'OpenSSH'
+  239  sudo ufw status
+  240  sudo ufw enable
+  241  sudo certbot --nginx -d api.mikasa.tech
+  242  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  243  sudo certbot --nginx -d api.mikasa.tech
+  244  sudo certbot --nginx -d api.mikasa.tech -v
+  245  ls
+  246  cd hackupc_2023/
+  247  ls
+  248  git pull
+  249  cd backend/
+  250  ls
+  251  make
+  252  systemctl restart goweb
+  253  sudo systemctl restart goweb
+  254  sudo systemctl status goweb 
+  255  sudo systemctl restart goweb && sudo systemctl status goweb 
+  256  curl -X POST api.mikasa.tech/getHouses -d '{"params":["bake a cake"]}'
+  257  curl -X POST localhost:9991/getHouses -d '{"params":["bake a cake"]}'
+  258  git pull
+  259  make
+  260  git pull && make && sudo systemctl restart goweb
+  261  cat main.go | less
+  262  cat main.go | less -N
+  263  git switch -
+  264  git branch
+  265  git pull
+  266  git config pull.ff only
+  267  git pull
+  268  git pull ori
+  269  git stash
+  270  git config pull.rebase false
+  271  git pull
+  272  cd ../..
+  273  ls
+  274  cp hackupc_2023/backend/.env .
+  275  ls
+  276  cat .env 
+  277  rm -rf hackupc_2023/
+  278  git clone git@github.com:AOrps/hackupc_2023.git
+  279  ls
+  280  cd hackupc_2023/
+  281  cd backend/
+  282  git pull
+  283  git pull && make && sudo systemctl restart goweb
+  284  systemctl status goweb
+  285  make
+  286  ls
+  287  git pull && make && sleep 3 && sudo systemctl restart goweb
+  288  systemctl status goweb
+  289  cp ../../.env .env
+  290  ls
+  291  systemctl status goweb
+  292  make
+  293  curl -X POST localhost:9991/getHouses -d '{"params":["bake a cake", "read a book"]}'
+  294  journalctl -u goweb
+  295  sudo systemctl restart goweb
+  296  sudo systemctl status goweb
+  297  git pull
+  298  sudo systemctl stop goweb
+  299  ./main.o 
+  300  ./main.o&
+  301  curl -X POST api.mikasa.tech/getHouses -H 'Content-Type: application/json' -d '{"params":["bake a cake"]}'
+  302  curl -X POST localhost:9991/getHouses -H 'Content-Type: application/json' -d '{"params":["bake a cake"]}'
+  303  nginx -t
+  304  sudo nginx -t
+  305  sudo nginx -s reload
+  306  sudo systemctl start goweb nginx
+  307  curl -X POST localhost:9991/getHouses -H 'Content-Type: application/json' -d '{"params":["bake a cake"]}'
+  308  curl -X POST api.mikasa.tech/getHouses -H 'Content-Type: application/json' -d '{"params":["bake a cake"]}'
+  309  curl -X POST localhost:9991/getHouses -H 'Content-Type: application/json' -d '{"params":["bake a cake"]}'
+  310  cat .env 
+  311  less /var/log/nginx/error.log 
+  312  journalctl -u goweb
+  313  journalctl -u nginx
+  314  nano /etc/nginx/sites-available/api.mikasa.tech 
+  315  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  316  nginx -t
+  317  sudo nginx -t
+  318  systemctl restart goweb nginx
+  319  sudo systemctl restart goweb nginx
+  320  ls
+  321  jobs
+  322  kill -9 %1
+  323  sudo systemctl restart goweb nginx
+  324  ls
+  325  cat /etc/nginx/sites-available/api.mikasa.tech 
+  326  cat /lib/systemd/system/goweb.service 
+  327  git pull && make && sleep 3 && sudo systemctl restart goweb
+  328  crontab -e
+  329  ls
+  330  man crontab 
+  331  apropos cron
+  332  crontab
+  333  cd hackupc_2023/
+  334  git pull
+  335  git pull && make && sleep 3 && sudo systemctl restart goweb
+  336  cd ~/hackupc_2023/backend/ && git pull && make && sleep 3 && sudo systemctl restart goweb
+  337  systemctl status goweb nginx
+  338  curl localhost:9991/getCompletions?text=netflix
+  339  git pull
+  340  git remote
+  341  git remote -v
+  342  ls
+  343  nano ../../.env
+  344  cp ../../.env .env
+  345  cd ~/hackupc_2023/backend/ && git pull && make && sleep 3 && sudo systemctl restart goweb
+  346  sudo systemctl status goweb
+  347  sudo systemctl restart goweb
+  348  sudo systemctl status goweb
+  349  journalctl -u goweb
+  350  cat .env 
+  351  nano .env 
+  352  cd ~/hackupc_2023/backend/ && git pull && make && sleep 3 && sudo systemctl restart goweb
+  353  ls
+  354  cat main.go | less -N
+  355  cd ~/hackupc_2023/backend/ && git pull && make && sleep 3 && sudo systemctl restart goweb
+  356  ls
+  357  pip install elasticsearch
+  358  ./estool.py 
+  359  git pull 
+  360  git pull origin main --force
+  361  ls
+  362  cat .env
+  363  cd ..
+  364  rm -rf hackupc_2023/
+  365  git clone git@github.com:AOrps/hackupc_2023.git
+  366  e .env 
+  367  nano .env 
+  368  cd hackupc_2023/backend/
+  369  make
+  370  cd ~/hackupc_2023/backend/ && git pull && make && sleep 3 && sudo systemctl restart goweb
+  371  sudo systemctl restart goweb
+  372  sudo systemctl status goweb
+  373  cp ../../.env .env
+  374  sudo systemctl restart goweb
+  375  sudo systemctl status goweb
+  376  sudo systemctl restart goweb
+  377  sudo systemctl status goweb
+  378  journalctl -u goweb
+  379  cat .env 
+  380  nano ../../.env 
+  381  cp ../../.env .env
+  382  ls
+  383  sudo systemctl restart goweb
+  384  sudo systemctl status goweb
+  385  ls
+  386  python
+  387  sudo apt install python3
+  388  python3
+  389  python3 -m pip install -r requirements.txt 
+  390  sudo apt install python3-pip
+  391  sudo apt install python3-pip3
+  392  sudo apt installpip3
+  393  sudo apt install pip3
+  394  ls
+  395  python3 -m venv .env
+  396  python3 -m venv .venv
+  397  cat .env
+  398  sudo apt install python3-venv
+  399  sudo apt install -y python3-venv
+  400  python -m venv venv
+  401  python3 -m venv venv
+  402  apt install python3.10-venv
+  403  sudo apt install python3.10-venv
+  404  python3 -m ensurepip --upgrade
+  405  python3 -m pip
+  406  python3 -m install pip
+  407  python3 -m ppi
+  408  python3 -m pip
+  409  python3 -m ensurepip
+  410  python3
+  411  man python3
+  412  sudo apt-get install python3-pip
+  413  sudo apt-get update
+  414  sudo apt-get install python3-pip
+  415  pip
+  416  pip install -r requirements.txt 
+  417  python estool.py 
+  418  python3 estool.py 
+  419  nano .env 
+  420  python3 estool.py 
+  421  ls
+  422  ./estool.py 
+  423  python3 estool.py 
+  424  python3 estool.py | grep -n "oven"
+  425  python3 estool.py | grep -n "oven" | cut -d: -f1
+  426  ls
+  427  e main.go 
+  428  nano main.go
+  429  make 
+  430  make && systemctl restart goweb
+  431  make && sudo systemctl restart goweb
+  432  journalctl -u goweb
+  433  ls
+  434  cat .env 
+  435  sudo systemctl status goweb
+  436  nano main.go 
+  437  journalctl -u goweb
+  438  ls
+  439  cat .env 
+  440  nano main.go 
+  441  make
+  442  make && sudo systemctl restart goweb
+  443  journalctl -u goweb
+  444  make && sudo systemctl status goweb
+  445  make && sudo systemctl restart goweb
+  446  journalctl -u goweb
+  447  nano main.go 
+  448  nginx -s reload
+  449  sudo nginx -s reload
+  450  sudo systemctl restart goweb nginx
+  451  ls
+  452  nano main.go 
+  453  make && systemctl restart goweb
+  454  make && sudo systemctl restart goweb
+  455  nano /etc/nginx/sites-available/api.mikasa.tech 
+  456  nano main.go 
+  457  git add .
+  458  git commit -m "asdasdfa"
+  459  cat main.go 
+  460  nano main.go 
+  461  make && sudo systemctl restart goweb
+  462  nano main.go 
+  463  jq
+  464  sudo apt install -y jq
+  465  cp ~/top-10k.json .
+  466  ls
+  467  cat top-10k.json | jq
+  468  sed -E 's/\'/"/g' top-10k.json
+  469  sed -E 's/\\'/"/g' top-10k.json
+  470  sed -E 's/\\'/\"/g' top-10k.json
+  471  sed -E 's/\'/\"/g' top-10k.json
+  472  nano main.go 
+  473  make && sudo systemctl restart goweb
+  474  nano main.go 
+  475  make && sudo systemctl restart goweb
+  476  nano main.go 
+  477  ls
+  478  sudo apt isntall -y yq
+  479  sudo apt install -y yq
+  480  sudo apt install -y yj
+  481  ls
+  482  cat top-10k.json 
+  483  cat top-10k.json | tr "'" '"' > m-10k.json
+  484  cat m-10k.json 
+  485  cat m-10k.json | m
+  486  cat m-10k.json | less
+  487  nano main.go 
+  488  make && sudo systemctl restart goweb
+  489  ls
+  490  cat m-10k.json | sed -E 's/(\{.*\}),$/\1/g'
+  491  cat m-10k.json | sed -E 's/(\{.*\}),$/\1/g' | head -n 10 | less
+  492  cat 
+  493  nano main.go 
+  494  make && sudo systemctl restart goweb
+  495  nano main.go 
+  496  make && sudo systemctl restart goweb
+  497  nano main.go 
+  498  make && sudo systemctl restart goweb
+  499  nano main.go 
+  500  make && sudo systemctl restart goweb
+  501  nano main.go 
+  502  cat e-10k.json 
+  503  cat e-10k.json | less
+  504  nano main.go 
+  505  make && sudo systemctl restart goweb
+  506  nano main.go 
+  507  cat e-10k.json | m
+  508  cat e-10k.json | less
+  509  nano main.go 
+  510  make && sudo systemctl restart goweb
+  511  nano main.go 
+  512  make && sudo systemctl restart goweb
+  513  ls
+  514  cd hackupc_2023/
+  515  ls
+  516  cd backend/
+  517  nano main.go 
+  518  make && sudo systemctl restart goweb
+  519  curl -X POST localhost:9991/getReview -d '{"params":"asdfasd"}' -H "Content-Type: application/json"
+  520  curl -X POST localhost:9991/getReview -d '{"params":"<home> <room name='bathroom'> <appliance name='sink'> </room> <roo"}' -H "Content-Type: application/json"
+  521  curl -X POST localhost:9991/getReview -d '{"params":"<home> <room name='bathroom'> <appliance name='sink'> </room> </home>"}' -H "Content-Type: application/json"
+  522  nano main.go 
+  523  make && sudo systemctl restart goweb
+  524  nano main.go 
+  525  make && sudo systemctl restart goweb
+  526  ls
+  527  sudo systemctl status goweb
+  528  make 
+  529  sudo systemctl status goweb
+  530  make
+  531  sudo systemctl status goweb
+  532  make
+  533  sudo systemctl status goweb
+  534  make
+  535  sudo systemctl status goweb
+  536  make
+  537  rm main.o
+  538  make
+  539  ls
+  540  sudo systemctl status goweb
+  541  sudo systemctl restart goweb
+  542  sudo systemctl status goweb
+  543  ls
+  544  make
+  545  sudo systemctl status goweb
+  546  make && sudo systemctl restart goweb
+  547  sudo systemctl status goweb
+  548  journalctl -u goweb
+  549  ls
+  550  cat .env
+  551  journalctl -u goweb
+  552  make && sudo systemctl restart goweb
+  553  sudo systemctl status goweb
+  554  make && sudo systemctl restart goweb nginx
+  555  sudo systemctl status goweb nginx
+  556  make && sudo systemctl restart goweb nginx
+  557  sudo systemctl status goweb nginx
+  558  journalctl -u goweb
+  559  make && sudo systemctl restart goweb nginx
+  560  sudo systemctl status goweb nginx
+  561  make && sudo systemctl restart goweb nginx
+  562  sudo systemctl status goweb nginx
+  563  ls
+  564  cat .env 
+  565  git remote -v
+  566  git branch
+  567  cat /var/log/nginx/error.log 
+  568  curl -X POST localhost:9991/getReview
+  569  curl -X POST localhost:9991/getReview -d '{"params":"yes"}' -H "Content-Type: application/json"
+  570  cat /etc/nginx/sites-available/api.mikasa.tech 
+  571  nano /etc/nginx/sites-available/api.mikasa.tech 
+  572  sudo nano /etc/nginx/sites-available/api.mikasa.tech 
+  573  nginx -s reload
+  574  sudo nginx -s reload
+  575  sudo systemctl restart nginx
+  576  nginx -t
+  577  sudo nginx -t
+  578  sudo systemctl restart goweb nginx
+  579  sudo systemctl status goweb nginx
+  580  make && sudo systemctl status goweb nginx
+  581  sudo systemctl stop goweb nginx
+  582  sudo systemctl status goweb nginx
+  583  curl -X POST localhost:9991/getReview -d '{"params":"yes"}' -H "Content-Type: application/json"
+  584  sudo systemctl restart goweb nginx
+  585  sudo systemctl status goweb nginx
+  586  make && sudo systemctl status goweb nginx
+  587  sudo systemctl status goweb nginx
+  588  ls
+  589  pwd
+  590  cd hackupc_2023/backend/
+  591  ls
+  592  make && sudo systemctl restart goweb nginx
+  593  sudo systemctl status goweb nginx
+  594  nano main.go 
+  595  make && sudo systemctl restart goweb nginx
+  596  systemctl status goweb
+  597  journalctl goweb
+  598  journalctl -u goweb
+  599  man journalctl 
+  600  journalctl -a goweb
+  601  journalctl -u goweb
+  602  man journalctl 
+  603  sudo systemctl status goweb
+  604  nano main.go 
+  605  sudo systemctl status goweb
+  606  make && sudo systemctl restart goweb nginx
+  607  sudo systemctl status goweb
+  608  nano main.go 
+  609  make && sudo systemctl restart goweb
+  610  sudo systemctl status goweb
+  611  sudo apt install -y emacs
+  612  emacs -n
+  613  emacs -n main.go 
+  614  ls
+  615  make && sudo systemctl restart goweb
+  616  make cleann
+  617  make clean
+  618  make
+  619  cat Makefile 
+  620  make && sudo systemctl restart goweb
+  621  ls -al
+  622  emacs -n Makefile 
+  623  nano Makefile 
+  624  make && sudo systemctl restart goweb nginx
+  625  go build -o main.o main.go --verbose
+  626  man go
+  627  go --help | less
+  628  go build --help | l
+  629  go build -o main.o main.go -v
+  630  go build -v -o main.o main.go
+  631  go build -v -o main.o main.go && sudo systemctl restart goweb nginx
+  632  rm main.o && go build -v -o main.o main.go && sudo systemctl restart goweb nginx
+  633  go build -work main.go
+  634  rm /tmp/go-build2407466548/
+  635  rm -rf /tmp/go-build2407466548/
+  636  rm main.o && go build -v -o main.o main.go && sudo systemctl restart goweb nginx
+  637  curl -X POST localhost:9991/getReview
+  638  ls
+  639  make
+  640  nano main.go 
+  641  journalctl -u goweb
+  642  systemctl status goweb
+  643  nano main.go 
+  644  make && systemctl restart goweb
+  645  make && sudo systemctl restart goweb
+  646  sudo systemctl status goweb
+  647  ip addr
+  648  sudo systemctl status goweb
+  649  nano main.go 
+  650  make && sudo systemctl restart goweb nginx
+  651  nano main.go 
+  652  make && sudo systemctl restart goweb nginx
+  653  nano main.go 
+  654  make && sudo systemctl restart goweb nginx
+  655  sudo systemctl status goweb
+  656  make && sudo systemctl restart goweb nginx
+  657  nano main.go 
+  658  make && sudo systemctl restart goweb nginx
+  659  make && sudo systemctl statusstatus goweb
+  660  sudo systemctl stattus goweb
+  661  sudo systemctl status goweb
+  662  nano main.go 
+  663  make && sudo systemctl restart goweb nginx
+  664  nano main.go 
+  665  make && sudo systemctl restart goweb nginx
+  666  nano main.go 
+  667  make && sudo systemctl restart goweb nginx
+  668  cat .env 
+  669  history
+  670  ls
+  671  cd hackupc_2023/
+  672  ls
+  673  history > backend-cmd-history.out
