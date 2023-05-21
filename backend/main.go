@@ -1,15 +1,24 @@
 package main
 
 import (
+	"strings"
+	"bufio"
+	"time"
+	// "os/exec"
 	"bytes"
+	"math/rand"
 	"io/ioutil"
 	"encoding/json"
-	"os"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"os/exec"
 	"strconv"
+
 	"github.com/joho/godotenv"
+
 	// "elastic/go-elasticsearch"
 	"github.com/AOrps/hackupc_2023/backend/src"
 	"database/sql"
@@ -19,6 +28,40 @@ import (
 const (
 	PORT = 9991
 )
+
+func randomInt(min, max int) int {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(max-min+1) + min
+}
+
+func findLineWithWord(filename string, word string) (string, error) {
+    file, err := os.Open(filename)
+    if err != nil {
+        return "", err
+    }
+    defer file.Close()
+
+    i := 0
+    randNumMin := randomInt(1,100)
+    randNumMax := randomInt(100,4000)
+    randNum := randomInt(randNumMin,randNumMax)
+
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+        line := scanner.Text()
+        if strings.Contains(line, word) && i > randNum {
+            return line, nil
+        }
+	i += 1
+    }
+
+    if err := scanner.Err(); err != nil {
+        return "", err
+    }
+
+    return "", fmt.Errorf("Word not found")
+}
+
 
 type Cache struct {
 	Endp string `json:"endp"`
@@ -55,8 +98,12 @@ func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin","*")
 }
 
+
+
+
 func root(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
+
 	switch r.Method {
 	default:
 		fmt.Fprintf(w, "NOT AVAILABLE")
@@ -82,7 +129,9 @@ func getHouses(w http.ResponseWriter, r *http.Request) {
 	case "POST":
 		
 		r.ParseForm()
+		
 
+		
 		var params src.HFIngest
 
 		err := json.NewDecoder(r.Body).Decode(&params)
@@ -161,6 +210,7 @@ Answer: watch
 			log.Fatalf("%v", err)
 		}
 
+
 		respBod := bytes.NewBuffer(postBod)
 		
 		resp, err := http.Post(os.Getenv("HF_ENDP_COMPL"), "application/json",respBod)
@@ -185,20 +235,30 @@ Answer: watch
 	}
 }
 
+type HFOngest struct {
+	Params string `json:"params"`
+	ForStudents bool `json:"forStudents"`
+	Sustainable bool `json:"sustainable"`
+	OrderBy string `json:"orderBy"`
+}
+
 
 func getReview(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	
 	switch r.Method {
+	case "GET":
+		// query := r.URL.Query()
 	case "POST":
-		
 		r.ParseForm()
 
-		var params src.HFIngest
+		var params HFOngest
 
+		// fmt.Println(r)
+		// fmt.Printf("[%s]", params.Params)
 		err := json.NewDecoder(r.Body).Decode(&params)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
 
 		defer r.Body.Close()
@@ -207,8 +267,12 @@ func getReview(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(input)
 		postBod, err := json.Marshal(map[string]string{
 			"inputs":input,
+			"min_length":"250",
 		})
 
+		// fmt.Println(input)
+
+		// fmt.Println(postBod)
 		if err != nil {
 			log.Fatalf("%v", err)
 		}
@@ -229,7 +293,7 @@ func getReview(w http.ResponseWriter, r *http.Request) {
 		}
 
 		sb := string(body)
-			
+		// w.Header().Set("Content-Type","application/json")			
 		fmt.Fprintf(w,sb)
 		
 	case "default":
@@ -322,18 +386,46 @@ func init() {
 }
 
 func esHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	switch r.Method {
 	case "GET":
 		query := r.URL.Query()
 
 		term:= query.Get("term")
+		// fmt.Fprintf(w, term)
 
-		amt,err := strconv.Atoi(query.Get("amt"))
+		line,err := findLineWithWord("e-10k.json", term)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println(line)
+		}
+
+		fmt.Fprintf(w,line)
+		/*
+		amt, err := strconv.Atoi(query.Get("amt"))
+
+		if err != nil {
+			log.Fatal(err)
+		}
+		
+		// amt := 20
+
+		// cmdPrompt := fmt.Sprintf("python3 estool.py %s %s",term, amt)
+		cmdPrompt_HACKED := fmt.Sprintf("python3 estool.py ",term)
+		// cmd := exec.Command(cmdPrompt)
+		cmd := exec.Command(cmdPrompt_HACKED)
+
+		out, err := cmd.Output()
+
+		fmt.Println(out)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		src.EsSearch(term, amt)
+		fmt.Fprintf(w, "%s", string(out))
+		// src.EsSearch(term, amt)
+		*/
 	default:
 		fmt.Fprintf(w, "Not available")
 	}
@@ -348,8 +440,10 @@ func main() {
 	http.HandleFunc("/",root)
 	http.HandleFunc("/getAppliances", getHouses)
 	http.HandleFunc("/getCompletion", getCompletion)
+	http.HandleFunc("/getReview", getReview)
 	http.HandleFunc("/getEs", esHandler)
-	
+	http.HandleFunc("/getES", esHandler)	
+
 	fmt.Printf("Server running on http://localhost:%s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port,nil))
 	

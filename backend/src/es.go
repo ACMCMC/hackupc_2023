@@ -1,7 +1,7 @@
 package src
 
 // for elastic search
-
+/*
 import (
 	// "bytes"
 	// "io/ioutil"
@@ -32,6 +32,7 @@ type ESIngest  struct {
 }
 
 // term --> search string and n the number of records outputed
+/*
 func EsSearch(term string, n int) {
 	cfg := elasticsearch.Config{
 		CloudID: os.Getenv("ELASTICSEARCH_CLOUDID"),
@@ -46,7 +47,7 @@ func EsSearch(term string, n int) {
 	
 	fmt.Println(es.Info())
 
-	/*
+
 	res, err := es.Search()
 
 	if err != nil {
@@ -56,7 +57,7 @@ func EsSearch(term string, n int) {
 	defer res.Body.Close()
 
 	fmt.Println(res)
-	*/
+
 	
 	res, err := es.Search().Index("index_name").
 		Request(&search.Request{
@@ -78,7 +79,7 @@ func EsSearch(term string, n int) {
 }
 `, term)
 	fmt.Println(rJsonQuery)
-	/*
+
 	res, err := es.Search().Raw([]byte(rJsonQuery))
 	if err != nil {
 		log.Fatal(err)
@@ -90,8 +91,8 @@ func EsSearch(term string, n int) {
 
 	// es.Search().Raw([]byte(`{"query": { "term": {  "image_data.feature" : {  "value:} }}}`))
 	fmt.Println(es)
-	*/
-}
 
+}
+*/
 
 

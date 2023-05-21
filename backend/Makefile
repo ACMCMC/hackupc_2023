@@ -6,7 +6,7 @@ OUT = main.o
 all: $(PROGS)
 
 # To Compile the Go Binary
-compile:
+compile: clean
 	$(CC) build -o $(OUT) main.go
 
 # Running the Go Binary
