@@ -1,12 +1,37 @@
-*.json
+# Logs
 run_*.log
+*.log
+
+# Python
 __pycache__
+*.pyc
+*.pyo
+*.pyd
+venv/
+
 # Files
 *~
 .env
+.env.local
+.env.*.local
 main.o
 .*#
 
-# Directories
-node_modules
-venv/
+# Build outputs
+/backend/main
+/frontend/build
+/frontend/.cache
+
+# Dependencies
+node_modules/
+vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
