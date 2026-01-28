@@ -36,7 +36,7 @@ Mikasa is a full-stack home search application that uses AI to help users find t
                 │                          │
                 │                          │
     ┌───────────▼──────────┐   ┌──────────▼───────────┐
-    │   PostgreSQL DB      │   │   Python ML Tools    │
+    │   PostgreSQL DB      │   │   External Services  │
     │   (AWS RDS)          │   │   - restb.ai API     │
     │                      │   │   - HuggingFace API  │
     │  Tables:             │   │   - Elasticsearch    │
@@ -63,7 +63,7 @@ Mikasa is a full-stack home search application that uses AI to help users find t
 - **Deployment**: Vercel with custom domain
 
 ### Backend (Go)
-- **Language**: Go 1.20
+- **Language**: Go 1.20+
 - **HTTP Server**: Native Go net/http
 - **Port**: 9991
 - **Database Driver**: lib/pq (PostgreSQL)

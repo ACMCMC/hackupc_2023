@@ -89,6 +89,8 @@ CREATE TABLE "Cache_DB" (
 
 See [database-schema.md](../docs/database-schema.md) for full details.
 
+**Note**: For comprehensive setup instructions including database initialization and environment configuration, refer to the [main README](../README.md) in the root directory.
+
 ## Testing
 
 ```bash

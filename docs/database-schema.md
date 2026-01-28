@@ -139,9 +139,9 @@ CREATE TABLE "Cache_DB" (
 CREATE INDEX idx_cache_resource_query ON "Cache_DB" (resource, query);
 CREATE INDEX idx_cache_created_at ON "Cache_DB" (created_at);
 
--- Grant permissions (adjust username as needed)
-GRANT ALL PRIVILEGES ON TABLE "Cache_DB" TO your_db_username;
-GRANT USAGE, SELECT ON SEQUENCE "Cache_DB_id_seq" TO your_db_username;
+-- Grant permissions (replace with your actual database username)
+GRANT ALL PRIVILEGES ON TABLE "Cache_DB" TO mikasa_user;
+GRANT USAGE, SELECT ON SEQUENCE "Cache_DB_id_seq" TO mikasa_user;
 ```
 
 ## Backup and Maintenance

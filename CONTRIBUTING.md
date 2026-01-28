@@ -45,7 +45,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 * Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
 * Limit the first line to 72 characters or less
 * Reference issues and pull requests liberally after the first line
-* Consider starting the commit message with an applicable emoji:
+* **Optional**: Consider starting the commit message with an applicable emoji (note: emojis are optional and clear, descriptive messages are more important):
     * 🎨 `:art:` when improving the format/structure of the code
     * 🐎 `:racehorse:` when improving performance
     * 📝 `:memo:` when writing docs

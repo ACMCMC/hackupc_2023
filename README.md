@@ -13,7 +13,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
-**[Live Demo](#) | [Architecture](./docs/architecture.md) | [Report Bug](https://github.com/ACMCMC/hackupc_2023/issues)**
+**[View Demo (Coming Soon)](#) | [Architecture](./docs/architecture.md) | [Report Bug](https://github.com/ACMCMC/hackupc_2023/issues)**
 
 </div>
 
@@ -63,10 +63,10 @@ Mikasa is built with a modern, scalable architecture:
 │  Frontend   │    REST API      │   (AWS EC2) │               │   (AWS RDS)  │
 └─────────────┘                  └──────┬──────┘               └──────────────┘
                                         │
-                                        │ AI APIs
+                                        │ HTTP/REST APIs
                                         ▼
                         ┌──────────────────────────────┐
-                        │  External AI Services        │
+                        │  External Services           │
                         │  • HuggingFace (NLP)        │
                         │  • restb.ai (Image Analysis) │
                         │  • Elasticsearch (Search)    │
@@ -80,8 +80,8 @@ Mikasa is built with a modern, scalable architecture:
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework**: React 18.2 with TypeScript
-- **UI Library**: Material-UI (MUI) 5.13
+- **Framework**: React 18+ with TypeScript
+- **UI Library**: Material-UI (MUI) 5.x
 - **State Management**: React Hooks
 - **Authentication**: Auth0
 - **Routing**: React Router v6
@@ -89,7 +89,7 @@ Mikasa is built with a modern, scalable architecture:
 - **Deployment**: Vercel
 
 ### Backend
-- **Language**: Go 1.20
+- **Language**: Go 1.20+
 - **Web Server**: Native Go net/http
 - **Database**: PostgreSQL (AWS RDS)
 - **Database Driver**: lib/pq
@@ -117,11 +117,11 @@ Mikasa is built with a modern, scalable architecture:
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v16 or higher)
-- **npm** or **yarn**
-- **Go** (v1.20 or higher)
-- **PostgreSQL** (v12 or higher)
-- **Python** (v3.8 or higher) - for data tools
+- **Node.js** (v16 or higher) - [Download](https://nodejs.org/)
+- **npm** or **yarn** - Comes with Node.js
+- **Go** (v1.20 or higher) - [Download](https://golang.org/dl/)
+- **PostgreSQL** (v12 or higher) - [Download](https://www.postgresql.org/download/)
+- **Python** (v3.8 or higher) - For data processing tools
 
 ### Installation
 
@@ -148,20 +148,22 @@ Before you begin, ensure you have the following installed:
    Create a `.env` file in the `backend` directory:
    ```bash
    # Database Configuration
-   DB_USERNAME=your_db_username
-   DB_PASSWORD=your_db_password
-   DB_HOST=your_db_host
+   DB_USERNAME=mikasa_user
+   DB_PASSWORD=your_secure_password_here
+   DB_HOST=localhost
    DB_PORT=5432
-   DB_NAME=your_db_name
+   DB_NAME=mikasa_db
 
    # API Keys
-   HF_ENDP=your_huggingface_endpoint
-   HF_ENDP_COMPL=your_huggingface_completion_endpoint
+   HF_ENDP=https://your-huggingface-endpoint.com
+   HF_ENDP_COMPL=https://your-huggingface-completion-endpoint.com
    ```
 
 5. **Set up the Database**
+   
+   Connect to your PostgreSQL instance and run:
    ```sql
-   CREATE DATABASE your_db_name;
+   CREATE DATABASE mikasa_db;
    
    CREATE TABLE "Cache_DB" (
        id SERIAL PRIMARY KEY,
