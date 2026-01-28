@@ -1,12 +1,47 @@
-*.json
+# Dependencies
+node_modules/
+venv/
+
+# Build outputs
+build/
+dist/
+*.o
+main
+
+# Logs
+*.log
 run_*.log
-__pycache__
-# Files
-*~
+
+# Environment variables
 .env
-main.o
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .*#
 
-# Directories
-node_modules
-venv/
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
