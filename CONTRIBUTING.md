@@ -155,7 +155,7 @@ go test ./...
 ## Documentation
 
 * Update the README.md if you change functionality
-* Update the ARCHITECTURE.md if you change system design
+* Update the docs/ARCHITECTURE.md if you change system design
 * Add JSDoc/GoDoc comments for new functions
 * Update API documentation if you change endpoints
 

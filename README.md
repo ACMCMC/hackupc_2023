@@ -11,7 +11,7 @@
 [![Elasticsearch](https://img.shields.io/badge/Elasticsearch-8.7.0-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)](https://www.elastic.co/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
-[Live Demo](#) • [Report Bug](https://github.com/ACMCMC/hackupc_2023/issues) • [Request Feature](https://github.com/ACMCMC/hackupc_2023/issues)
+[Report Bug](https://github.com/ACMCMC/hackupc_2023/issues) • [Request Feature](https://github.com/ACMCMC/hackupc_2023/issues)
 
 </div>
 
@@ -66,6 +66,8 @@ MiKasa is an intelligent home search platform that helps users find their perfec
 │                 │         │                  │
 └─────────────────┘         └──────────────────┘
 ```
+
+> 📚 For detailed architecture documentation, see [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 
 ### Tech Stack
 
@@ -218,10 +220,13 @@ hackupc_2023/
 │   │   └── aggregate.go   # Data aggregation
 │   ├── main.go            # Entry point
 │   └── go.mod
+├── docs/                  # Documentation
+│   └── ARCHITECTURE.md    # Detailed architecture documentation
 ├── infra/                 # Infrastructure configuration
 ├── tests/                 # Test files
 ├── .gitignore
-├── LICENSE
+├── LICENSE                # MIT License
+├── CONTRIBUTING.md        # Contribution guidelines
 └── README.md
 ```
 
@@ -257,6 +262,15 @@ go test ./...
 ## 🤝 Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
+- How to report bugs and suggest enhancements
+- Development setup and workflow
+- Code style guidelines
+- Commit message conventions
+- Testing requirements
+
+Quick start:
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
