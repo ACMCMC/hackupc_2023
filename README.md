@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./frontend/src/static/images/MikasaLogo.png" alt="Mikasa Logo" width="200"/>
+
 # 🏠 Mikasa - AI-Powered Home Search
 
 ### *Find Your Perfect Home with Artificial Intelligence*
@@ -38,6 +40,9 @@
 
 ### Landing Page
 ![Landing Page](./frontend/src/static/images/LandingPage.jpg)
+
+### Search Interface
+![Search Interface](./frontend/src/static/images/LandingPage2.jpg)
 
 ### About Us
 ![About Us](./frontend/src/static/images/AboutUs.jpg)
